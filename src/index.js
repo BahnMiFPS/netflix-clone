@@ -5,6 +5,7 @@ import App from "./App"
 import theme from "./utils/theme"
 import { CssBaseline, ThemeProvider } from "@mui/material"
 import { AuthProvider } from "./contexts/AuthContext"
+import { BrowserRouter } from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(

@@ -28,7 +28,6 @@ function Form() {
 	let from = location.state?.from?.pathname || "/"
 
 	let auth = useAuth()
-
 	const [showPassword, setShowPassword] = React.useState(false)
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show)
@@ -59,9 +58,7 @@ function Form() {
 		}),
 
 		onSubmit: (values) => {
-			auth.signin(values.email, () => {
-				navigate(from, { replace: true })
-			})
+			auth.signin(values.email, "/")
 		},
 		validateOnChange: false,
 		validateOnBlur: false,

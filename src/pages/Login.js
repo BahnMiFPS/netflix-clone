@@ -12,6 +12,7 @@ function Login() {
 		alignItems: "center",
 		justifyContent: "center",
 	}
+
 	return (
 		<Box sx={loginPageStyle}>
 			<Form />

@@ -17,9 +17,11 @@ const router = createBrowserRouter([
 		element: <div>not found</div>,
 	},
 ])
+
 function App() {
 	let auth = useAuth()
 	console.log(auth.user)
+	// if (!auth.user) return <Navigate to="/login" />
 	return <RouterProvider router={router} />
 }
 

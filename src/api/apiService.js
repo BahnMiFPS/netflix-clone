@@ -1,5 +1,5 @@
 import axios from "axios"
-import { API_KEY, BASE_URL } from "./config"
+import { BASE_URL, API_KEY } from "./requests"
 
 const apiService = axios.create({
 	baseURL: BASE_URL,

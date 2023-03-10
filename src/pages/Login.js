@@ -6,7 +6,7 @@ import theme from "../utils/theme"
 function Login() {
 	const loginPageStyle = {
 		backgroundColor: "#111",
-		height: "100vh",
+		minHeight: "100vh",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",

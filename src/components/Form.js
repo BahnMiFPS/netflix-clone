@@ -20,11 +20,11 @@ import "../pages/css/Form.css"
 import { Visibility, VisibilityOff } from "@mui/icons-material"
 import * as Yup from "yup"
 import { useAuth } from "../contexts/AuthContext"
-import { useLocation, useNavigation } from "react-router-dom"
+import { useLocation, useNavigate, useNavigation } from "react-router-dom"
 
 function Form() {
 	let location = useLocation()
-	let navigate = useNavigation()
+	let navigate = useNavigate()
 	let from = location.state?.from?.pathname || "/"
 
 	let auth = useAuth()
@@ -58,12 +58,13 @@ function Form() {
 		}),
 
 		onSubmit: (values) => {
-			auth.signin(values.email, "/")
+			auth.signin(values.email, () => {
+				navigate(from, { replace: true })
+			})
 		},
 		validateOnChange: false,
 		validateOnBlur: false,
 	})
-	console.log(auth)
 	return (
 		<Container
 			component={"form"}

@@ -1,14 +1,15 @@
-const API_KEY = process.env.REACT_APP_API_KEY
-
+const API_KEY = `${process.env.REACT_APP_API_KEY}`
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
 const requests = [
-	{
-		name: "Trending TV Shows",
-		url: `https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`,
-	},
 	{
 		name: "Trending movies",
 		url: `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`,
 	},
+	{
+		name: "Trending TV Shows",
+		url: `https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`,
+	},
+
 	{
 		name: "Action movies",
 		url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=28`,
@@ -121,4 +122,13 @@ const requestsTVShows = [
 	},
 ]
 
-export { requests, requestsMovies, requestsTVShows }
+const requestsGenreList = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+
+export {
+	requests,
+	requestsMovies,
+	requestsTVShows,
+	requestsGenreList,
+	BASE_URL,
+	API_KEY,
+}

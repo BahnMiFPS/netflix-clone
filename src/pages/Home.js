@@ -1,19 +1,23 @@
 import React from "react"
-import { Navigate } from "react-router-dom"
-import MainLayout from "../components/MainLayout"
+import { Navigate, Outlet } from "react-router-dom"
+import Navbar from "../components/Navbar/Navbar"
 import { useAuth } from "../contexts/AuthContext"
 
 function Home() {
 	let auth = useAuth()
-	console.log(auth.user)
-	if (!auth.user) return <Navigate to="/login" replace={true} />
-	return (
-		<>
-			<header>Header</header>
-			<MainLayout />
-			<footer>footer</footer>
-		</>
-	)
+	// if (!auth.user) return <Navigate to="/login" replace={true} />
+	// return (
+	// 	<>
+	// 		<Navbar />
+	// 		<Outlet />
+	// 		<footer>footer</footer>
+	// 	</>
+	// )
+	if (!auth.user) {
+		return <Navigate to="/login" replace={true} />
+	} else {
+		return <Navigate to="/browse" replace={true} />
+	}
 }
 
 export default Home

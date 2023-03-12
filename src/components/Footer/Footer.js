@@ -1,13 +1,26 @@
 import { Facebook, Instagram, Twitter } from "@mui/icons-material"
-import { Box, Container, Grid, Typography } from "@mui/material"
+import { Box, Container, Grid, Typography, useTheme } from "@mui/material"
 import React from "react"
 import { Link } from "react-router-dom"
-import { useTheme } from "styled-components"
 import "./Footer.css"
 const Footer = () => {
 	const theme = useTheme()
+	const style = {
+		footer: {
+			paddingTop: theme.spacing(8),
+		},
+		socialIcon: {
+			color: "grey",
+			cursor: "pointer",
+			"&:hover": {
+				color: "#fff",
+			},
+			marginRight: theme.spacing(1),
+			transition: ".1s",
+		},
+	}
 	return (
-		<Container maxWidth="md" className="footer" theme={theme} fixed>
+		<Container maxWidth="md" className="footer" style={style.footer} fixed>
 			<Grid container spacing={6}>
 				<Grid item xs={12}>
 					<Box>
@@ -25,27 +38,28 @@ const Footer = () => {
 				<Grid item xs={12}>
 					<Grid container>
 						<Grid item xs={4}>
-							<Typography color="textPrimary">Mentions légales</Typography>
+							<Typography color="textPrimary">Audio Description</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
+								to="http://ir.netflix.com/"
 							>
-								Qui sommes nous?
+								Investor Relations
 							</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Comment nous contacter?
+								Privacy
 							</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Notre vision
+								Contact Us
 							</Typography>
 							<Typography
 								component={Link}
@@ -56,69 +70,54 @@ const Footer = () => {
 							</Typography>
 						</Grid>
 						<Grid item xs={4}>
-							<Typography color="textPrimary">Mentions légales</Typography>
+							<Typography color="textPrimary">Help Center</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Mentions légales
+								Jobs
 							</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Centre d'aide
+								Legal Notices
 							</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Préférences de cookies
+								Cookies Preferences
 							</Typography>
 						</Grid>
 						<Grid item xs={4}>
-							<Typography color="textPrimary">Mentions légales</Typography>
+							<Typography color="textPrimary">Gift Cards</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Nous rejoindre
+								Netflix Shop
 							</Typography>
 							<Typography
 								component={Link}
 								color="textSecondary"
 								display="block"
 							>
-								Devenir développeur
+								Corporate Information
 							</Typography>
 						</Grid>
 					</Grid>
 				</Grid>
 				<Grid item xs={12}>
-					<Typography color="textPrimary">© 2021 Tunflix, Inc.</Typography>
+					<Typography color="textPrimary">© 2023 Vuflix, Inc.</Typography>
 				</Grid>
 			</Grid>
 		</Container>
 	)
 }
-
-// const useStyles = makeStyles((theme) => ({
-// 	footer: {
-// 		paddingTop: theme.spacing(8),
-// 	},
-// 	socialIcon: {
-// 		color: "grey",
-// 		cursor: "pointer",
-// 		"&:hover": {
-// 			color: "#fff",
-// 		},
-// 		transition: ".1s",
-// 		marginRight: theme.spacing(1),
-// 	},
-// }))
 
 export default Footer

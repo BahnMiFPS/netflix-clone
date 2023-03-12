@@ -12,9 +12,16 @@ import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
 import AdbIcon from "@mui/icons-material/Adb"
-
+import { Search, SearchRounded } from "@mui/icons-material"
+import styled from "styled-components"
+import { alpha, InputBase, useTheme } from "@mui/material"
+import SearchBar from "./SearchBar"
+import avatarImage from "./../../assets/images/pdp.png"
+import { useAuth } from "./../../contexts/AuthContext"
+import { useNavigate } from "react-router-dom"
 function RightPages() {
-	const settings = ["Profile", "Account", "Dashboard", "Logout"]
+	let auth = useAuth()
+	const settings = ["Logout"]
 
 	const [anchorElUser, setAnchorElUser] = React.useState(null)
 	const handleOpenUserMenu = (event) => {
@@ -24,11 +31,18 @@ function RightPages() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null)
 	}
+	let navigate = useNavigate()
+	const handleLogOut = () => {
+		auth.signout(() => {
+			navigate("/login", { replace: true })
+		})
+	}
 	return (
-		<Box sx={{ flexGrow: 0 }}>
+		<Box sx={{ flexGrow: 0, flexDirection: "row", display: "flex" }}>
+			<SearchBar />
 			<Tooltip title="Open settings">
 				<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-					<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+					<Avatar variant="rounded" alt="Remy Sharp" src={avatarImage} />
 				</IconButton>
 			</Tooltip>
 			<Menu
@@ -49,7 +63,9 @@ function RightPages() {
 			>
 				{settings.map((setting) => (
 					<MenuItem key={setting} onClick={handleCloseUserMenu}>
-						<Typography textAlign="center">{setting}</Typography>
+						<Typography textAlign="center" onClick={handleLogOut}>
+							{setting}
+						</Typography>
 					</MenuItem>
 				))}
 			</Menu>

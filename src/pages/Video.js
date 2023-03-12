@@ -1,52 +1,72 @@
-import { Modal, Typography } from "@mui/material"
-import { Box } from "@mui/system"
+import { CircularProgress, Stack } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import apiService from "../api/apiService"
 import { API_KEY } from "../api/requests"
+import ReactPlayer from "react-player/lazy"
 
+import theme from "../utils/theme"
+import "./css/Video.css"
 function Video() {
-	const style = {
-		position: "absolute",
-		top: "50%",
-		left: "50%",
-		transform: "translate(-50%, -50%)",
-		width: 400,
-		bgcolor: "background.paper",
-		border: "2px solid #000",
-		boxShadow: 24,
-		p: 4,
-	}
 	const navigate = useNavigate()
 	const { id } = useParams()
 	const [video, setVideo] = useState(null)
-
-	const [open, setOpen] = React.useState(false)
+	const [videoSite, setVideoSite] = useState(null)
+	let url = null
+	// `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
 	useEffect(() => {
 		const fetchData = async () => {
 			const data = await apiService.get(
-				`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+				`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`
 			)
-			setVideo(data)
+			// setVideo(data)
+			const result = data.data.videos.results
+			// let propSymb = Object.getOwnPropertySymbols(result)
+			// console.log(propSymb.length)
+			// console.log(result[propSymb.length])
+			const length = Object.keys(result).length
+			const lastResult = result[length - 1]
+
+			setVideo(lastResult.key)
+			setVideoSite(lastResult.site)
 		}
 		fetchData()
 	}, [])
-	const handleClose = () => {
-		navigate(-1)
-	}
+
+	// const videoKey = video.results[0].key
+	const youtubeVideoURL = `https://www.youtube.com/watch?v=`
+	const vimeoURL = `https://vimeo.com/`
+
+	console.log(video, videoSite)
+	if (videoSite === "YouTube") {
+		url = `${youtubeVideoURL}${video}`
+	} else if (videoSite === "Vimeo") {
+		url = `${vimeoURL}${video}`
+	} else url = null
+	console.log(url)
 	return (
-		<Modal
-			open={true}
-			onClose={handleClose}
-			aria-labelledby="modal-modal-title"
-			aria-describedby="modal-modal-description"
-		>
-			<Box sx={style}>
-				<Typography id="modal-modal-title" variant="h6" component="h2">
-					{id}
-				</Typography>
-			</Box>
-		</Modal>
+		<>
+			{url ? (
+				<div className="player-wrapper" sx={{ marginTop: theme.spacing(8) }}>
+					<ReactPlayer
+						url={url}
+						className="react-player"
+						width={"100%"}
+						height={"100%"}
+						controls={true}
+					/>
+				</div>
+			) : (
+				<Stack
+					alignItems="center"
+					justifyContent={"center"}
+					width={"100vw"}
+					height={"100vh"}
+				>
+					<CircularProgress />
+				</Stack>
+			)}
+		</>
 	)
 }
 

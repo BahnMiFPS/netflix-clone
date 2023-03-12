@@ -104,18 +104,7 @@ const requestsTVShows = [
 		name: "Family",
 		url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10751`,
 	},
-	{
-		name: "Kids",
-		url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10762`,
-	},
-	{
-		name: "Sci-Fi & Fantasy",
-		url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10765`,
-	},
-	{
-		name: "War & Politics",
-		url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10768`,
-	},
+
 	{
 		name: "Documentary",
 		url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=99`,

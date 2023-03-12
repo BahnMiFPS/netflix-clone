@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { CircularProgress, Stack, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { useParams, useSearchParams } from "react-router-dom"
 import apiService from "../api/apiService"
@@ -30,7 +30,14 @@ function Movie({ mediaType }) {
 					<Row title="More Like This" url={moreURL} />
 				</>
 			) : (
-				<Typography>No Movie Yet</Typography>
+				<Stack
+					alignItems="center"
+					justifyContent={"center"}
+					width={"100vw"}
+					height={"100vh"}
+				>
+					<CircularProgress />
+				</Stack>
 			)}
 		</>
 	)

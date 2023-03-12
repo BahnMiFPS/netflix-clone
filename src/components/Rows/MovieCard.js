@@ -3,7 +3,7 @@ import "./style.css"
 import { Link } from "react-router-dom"
 import { Card, CardActionArea } from "@mui/material"
 
-function MovieCard({ id, rating, img, title, mediaType }) {
+function MovieCard({ key, id, rating, img, title, mediaType }) {
 	return (
 		<Link to={`/${mediaType === "tv" ? "tv" : "movie"}/${id}`}>
 			<Card className="movie-card">

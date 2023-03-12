@@ -4,8 +4,9 @@ import axios from "axios"
 import { requests } from "../../api/requests"
 import MovieCard from "./MovieCard"
 import "./style.css"
-function Row({ title, url }) {
+function Row({ title, url, isSearch }) {
 	const [movies, setMovies] = useState(null)
+
 	useEffect(() => {
 		async function getTrendingMovies() {
 			try {

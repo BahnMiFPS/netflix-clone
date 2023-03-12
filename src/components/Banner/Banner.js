@@ -1,10 +1,11 @@
 import { Add, PlayArrow, PlusOne } from "@mui/icons-material"
 import { Button, Chip, Paper, Typography, useTheme } from "@mui/material"
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useOutletContext, useParams } from "react-router-dom"
 import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
+import GenreChip from "./GenreChip"
 function Banner({ movie, setMovie, movieId }) {
 	const theme = useTheme()
 	const paperTheme = {
@@ -69,10 +70,9 @@ function Banner({ movie, setMovie, movieId }) {
 	// for (let i = 0; i < movie.genre_ids.length; i++) {
 	//   if (movie.genre_ids[i] === )
 	// }
-
+	const handleAddToList = useOutletContext()
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -80,19 +80,22 @@ function Banner({ movie, setMovie, movieId }) {
 					`https://api.themoviedb.org/3/${media}/${id}?api_key=${API_KEY}&language=en-US`
 				)
 				setMovie(response.data)
+				setSelectedMovie(response.data)
 			} catch (error) {}
 		}
 		fetchData()
-	}, [id])
-	console.log(movie)
+	}, [id || media])
+	console.log("sdafasdf", movie)
 	return !movie ? (
-		<Typography color="primary">Loading</Typography>
+		<Typography color="primary">Doesnt have movie</Typography>
 	) : (
 		<>
 			<Paper style={paperTheme}>
 				<div style={bannerContent}>
 					<div style={bannerDetails}>
-						<Typography style={title}>{movie.title}</Typography>
+						<Typography style={title}>
+							{movie.title ? movie.title : movie.name}
+						</Typography>
 						{/* {movie.genres_ids.slice(0, 3).map((elem) => (
             <Chip>{elem.name}</Chip>
           ))} */}
@@ -101,6 +104,20 @@ function Banner({ movie, setMovie, movieId }) {
 								? `${movie.overview.slice(0, 150)}...`
 								: movie.overview}
 						</Typography>
+						{/* <div>
+							{movie.genres ? (
+								movie.genres.name ? (
+									movie.genres.map((genre) => (
+										<Typography>{genre.name}</Typography>
+									))
+								) : (
+									""
+								)
+							) : (
+								<div>"No Genres"</div>
+							)}
+						</div> */}
+
 						<div>
 							<Button
 								style={playBtn}
@@ -118,10 +135,13 @@ function Banner({ movie, setMovie, movieId }) {
 								variant="contained"
 								startIcon={<Add />}
 								size="large"
+								onClick={() => handleAddToList(movie)}
 							>
 								My List
 							</Button>
 						</div>
+						{/* I cant get movie T_T */}
+						{/* <GenreChip movieGenre={movie.genres} /> */}
 					</div>
 					<div style={bannerVignette}></div>
 				</div>

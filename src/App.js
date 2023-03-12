@@ -6,7 +6,11 @@ import Documentary from "./pages/Documentary"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Movie from "./pages/Movie"
+import Movies from "./pages/Movies"
+import MyList from "./pages/MyList"
 import Root from "./pages/Root"
+import SearchPage from "./pages/SearchPage"
+import TVShows from "./pages/TVShows"
 import Video from "./pages/Video"
 
 const router = createBrowserRouter([
@@ -19,20 +23,29 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: "/documentary",
-				element: <Documentary />,
+				path: "/movies",
+				element: <Movies />,
 			},
 			{
-				path: "/browse",
+				path: "/tv",
+				element: <TVShows />,
+			},
+			{
+				path: "/home",
 				element: <Browse />,
 			},
 			{
 				path: "/:media/:id",
 				element: <Movie />,
 			},
+
 			{
 				path: "/video/:id",
 				element: <Video />,
+			},
+			{
+				path: "/mylist",
+				element: <MyList />,
 			},
 		],
 	},
@@ -41,6 +54,7 @@ const router = createBrowserRouter([
 		path: "/login",
 		element: <Login />,
 	},
+
 	{
 		path: "*",
 		element: <div>not found</div>,

@@ -3,6 +3,22 @@
 	margin-right: 1rem;
 }
 
-a {
-	all: unset;
+.page-link {
+	padding: 0 4%;
+	align-items: center;
+	color: #a0a0a0;
+	cursor: pointer;
+	text-decoration: underline;
+	text-decoration: none;
+	background-color: transparent;
+	height: 100%;
+	position: relative;
+	transition: color 0.4s;
+}
+.page-link:hover {
+	color: #cacaca;
+}
+
+a.active {
+	color: #fff;
 }

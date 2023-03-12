@@ -1,0 +1,11 @@
+.search-content {
+	margin-top: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	width: auto;
+	gap: 0.5rem;
+}
+.page-title {
+	color: white;
+	letter-spacing: 8px;
+}

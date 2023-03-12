@@ -5,10 +5,10 @@
 .socialIcon {
 	color: grey;
 	cursor: pointer;
+	transition: 0.1s;
+	margin-right: 0.2em;
 }
 
 .socialIcon:hover {
 	color: white;
-	transition: 0.1s;
-	margin-right: 0.2rem;
 }

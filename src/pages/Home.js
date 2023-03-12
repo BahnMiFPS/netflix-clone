@@ -16,7 +16,7 @@ function Home() {
 	if (!auth.user) {
 		return <Navigate to="/login" replace={true} />
 	} else {
-		return <Navigate to="/browse" replace={true} />
+		return <Navigate to="/home" replace={true} />
 	}
 }
 

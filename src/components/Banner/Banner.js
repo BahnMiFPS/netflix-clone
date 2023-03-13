@@ -114,7 +114,6 @@ function Banner({
 
 		fetchData()
 	}, [id || media, isMovieDetail])
-	console.log("sdafasdf", movie)
 	return !movie ? (
 		<Typography color="primary">Doesnt have movie</Typography>
 	) : (
@@ -125,7 +124,31 @@ function Banner({
 						<Typography style={title}>
 							{movie.title ? movie.title : movie.name}
 						</Typography>
+						<Grid
+							sx={{
+								display: "flex",
+								alignItems: "flex-end",
+								textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
+								flexWrap: "wrap",
 
+								gap: 1,
+								marginBottom: theme.spacing(2),
+							}}
+						>
+							<ImdbRating
+								rating={movie.vote_average.toFixed(1)}
+								style={{
+									textShadow: "initial",
+									marginRight: theme.spacing(1),
+								}}
+							/>
+							{movie.genres
+								? movie.genres.map((genre) => (
+										<Paper style={infos}>{genre.name}</Paper>
+								  ))
+								: ""}
+							{/* <Paper style={infos}>{movie.year.slice(0, 4)}</Paper> */}
+						</Grid>
 						<Typography style={desc}>
 							{movie.overview.length > 150
 								? `${movie.overview.slice(0, 150)}...`
@@ -182,31 +205,6 @@ function Banner({
 							) : (
 								""
 							)}
-
-							<Grid
-								sx={{
-									display: "flex",
-									alignItems: "flex-end",
-									textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
-									flexWrap: "wrap",
-									marginTop: "1rem",
-									gap: 1,
-								}}
-							>
-								<ImdbRating
-									rating={movie.vote_average.toFixed(1)}
-									style={{
-										textShadow: "initial",
-										marginRight: theme.spacing(1),
-									}}
-								/>
-								{movie.genres
-									? movie.genres.map((genre) => (
-											<Paper style={infos}>{genre.name}</Paper>
-									  ))
-									: ""}
-								{/* <Paper style={infos}>{movie.year.slice(0, 4)}</Paper> */}
-							</Grid>
 						</Box>
 					</div>
 

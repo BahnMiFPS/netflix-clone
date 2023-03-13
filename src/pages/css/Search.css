@@ -9,4 +9,9 @@
 .page-title {
 	color: white;
 	letter-spacing: 8px;
+	margin-left: 0;
+	padding: 0;
+}
+.related-videos {
+	margin: 0;
 }

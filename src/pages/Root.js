@@ -15,7 +15,6 @@ import SearchPage from "./SearchPage"
 function Root() {
 	let auth = useAuth()
 	let [params] = useSearchParams()
-	console.log("from root", params.get("q"))
 	let searchParam = params.get("q")
 
 	const [favoriteMovies, setFavoriteMovies] = useState([])

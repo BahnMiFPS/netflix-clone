@@ -24,7 +24,6 @@ function Movies() {
 			console.log(error)
 		}
 	}, [])
-	console.log(movie)
 	// return movie ? <Banner movie={movie} /> : <div>Loading</div>
 	return movie ? (
 		<>

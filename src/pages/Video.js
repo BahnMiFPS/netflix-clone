@@ -37,13 +37,11 @@ function Video() {
 	const youtubeVideoURL = `https://www.youtube.com/watch?v=`
 	const vimeoURL = `https://vimeo.com/`
 
-	console.log(video, videoSite)
 	if (videoSite === "YouTube") {
 		url = `${youtubeVideoURL}${video}`
 	} else if (videoSite === "Vimeo") {
 		url = `${vimeoURL}${video}`
 	} else url = null
-	console.log(url)
 	return (
 		<>
 			{url ? (

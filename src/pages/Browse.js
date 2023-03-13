@@ -26,7 +26,6 @@ function Browse() {
 			console.log(error)
 		}
 	}, [])
-	console.log(movie)
 	// return movie ? <Banner movie={movie} /> : <div>Loading</div>
 	// searchParam ? (
 	// 	<SearchPage searchParam={searchParam} />

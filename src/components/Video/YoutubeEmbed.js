@@ -1,0 +1,51 @@
+import React from "react"
+import "./style.css"
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material"
+
+function YoutubeEmbed({ embedId, title, publishedAt }) {
+	function convertISOToUS(dateString) {
+		const date = new Date(dateString)
+		const month = date.getMonth() + 1
+		const day = date.getDate()
+		const year = date.getFullYear()
+
+		return `${month}/${day}/${year}`
+	}
+
+	const date = convertISOToUS(publishedAt)
+
+	return (
+		<Card sx={{ height: "100%" }}>
+			<CardMedia
+				component="iframe"
+				src={`https://www.youtube.com/embed/${embedId}`}
+				allow="autoPlay"
+				allowFullScreen
+				frameBorder={0}
+			/>
+			<CardContent
+				sx={{
+					height: "100%",
+				}}
+			>
+				<Grid
+					container
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-between",
+					}}
+				>
+					<Typography gutterBottom variant="h6" component="div">
+						{title}
+					</Typography>
+					<Typography variant="body2" color="text.secondary">
+						Published Date: {date}
+					</Typography>
+				</Grid>
+			</CardContent>
+		</Card>
+	)
+}
+
+export default YoutubeEmbed

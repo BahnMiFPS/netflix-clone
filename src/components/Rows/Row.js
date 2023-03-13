@@ -8,7 +8,6 @@ import { ChevronLeft, ForkLeft } from "@mui/icons-material"
 import { Box } from "@mui/material"
 function Row({ title, url, isSearch, casts, isCastCard }) {
 	const [movies, setMovies] = useState(null)
-
 	useEffect(() => {
 		async function getTrendingMovies() {
 			try {
@@ -21,6 +20,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 		}
 		getTrendingMovies()
 	}, [])
+
 	if (!casts) {
 		return (
 			<div className="row">
@@ -28,16 +28,20 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 				{movies ? (
 					<>
 						<div className="row-posters">
-							{movies.map((movie) => (
-								<MovieCard
-									key={movie.id}
-									id={movie.id}
-									rating={movie.vote_average}
-									img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-									title={movie.name}
-									mediaType={movie.media_type}
-								/>
-							))}
+							{movies.map((movie) =>
+								movie.media_type !== null ? (
+									<MovieCard
+										key={movie.id}
+										id={movie.id}
+										rating={movie.vote_average}
+										img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+										title={movie.name}
+										mediaType={movie.media_type}
+									/>
+								) : (
+									<></>
+								)
+							)}
 						</div>
 					</>
 				) : (

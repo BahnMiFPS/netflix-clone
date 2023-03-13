@@ -2,6 +2,7 @@ import {
 	Box,
 	CircularProgress,
 	Container,
+	Grid,
 	Stack,
 	Typography,
 } from "@mui/material"
@@ -13,6 +14,8 @@ import { API_KEY, BASE_URL } from "../api/requests"
 import Banner from "../components/Banner/Banner"
 import MovieCard from "../components/Rows/MovieCard"
 import Row from "../components/Rows/Row"
+import VideoContainer from "../components/Video/VideoContainer"
+import YoutubeEmbed from "../components/Video/YoutubeEmbed"
 import theme from "../utils/theme"
 import "./css/Search.css"
 function Movie({ mediaType }) {
@@ -21,6 +24,7 @@ function Movie({ mediaType }) {
 	const [selectedMovie, setSelectedMovie] = useState(null)
 	const [onMovieDetailPage, setOnMovieDetailPage] = useState(null)
 	const [casts, setCasts] = useState(null)
+	const [videos, setVideos] = useState(null)
 	const isCastCard = true
 	const moreURL = `https://api.themoviedb.org/3/${media}/${id}/similar?api_key=a7267ab151b0952338cfa979a59790b6&language=en-US&page=1`
 	useEffect(() => {
@@ -34,13 +38,20 @@ function Movie({ mediaType }) {
 			const response = await axios.get(
 				`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
 			)
-			console.log("moviecast response", response)
+
 			setCasts(response.data.cast)
 		}
-		fetchMovieCast()
+		const fetchMovieVideo = async () => {
+			const response = await axios.get(
+				`https://api.themoviedb.org/3/${media}/${id}/videos?api_key=${API_KEY}&language=en-US`
+			)
+
+			setVideos(response.data.results)
+		}
 		fetchData()
+		fetchMovieCast()
+		fetchMovieVideo()
 	}, [id])
-	console.log("this movie casts", casts)
 	return (
 		<>
 			{selectedMovie ? (
@@ -55,6 +66,7 @@ function Movie({ mediaType }) {
 						casts={casts}
 					/>
 					<Row url={moreURL} casts={casts} isCastCard={isCastCard} />
+					<VideoContainer videos={videos} />
 					<Row title="More Like This" url={moreURL} />
 				</>
 			) : (

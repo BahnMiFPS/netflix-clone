@@ -7,7 +7,6 @@ import MovieCard from "../components/Rows/MovieCard"
 import theme from "../utils/theme"
 import "./css/Search.css"
 function SearchPage({ searchParam }) {
-	console.log(searchParam)
 	const [movies, setMovies] = useState([])
 	useEffect(() => {
 		const fetchData = async () => {
@@ -23,7 +22,6 @@ function SearchPage({ searchParam }) {
 		}
 		fetchData()
 	}, [searchParam])
-	console.log(movies)
 
 	return (
 		<Container maxWidth sx={{ marginTop: theme.spacing(10) }}>

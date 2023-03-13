@@ -29,8 +29,8 @@
 
 .row-posters {
 	margin-left: 2rem;
-	padding-top: 30px;
-	padding-bottom: 100px;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 	display: flex;
 	overflow-x: scroll;
 	overflow-y: hidden;
@@ -41,6 +41,12 @@
 
 .row-posters::-webkit-scrollbar {
 	display: none;
+}
+
+.handle {
+	color: white;
+	background-color: rgb(64, 64, 64);
+	height: 100%;
 }
 
 @media screen and (max-width: 500px) {

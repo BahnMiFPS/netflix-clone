@@ -7,6 +7,7 @@ import Banner from "../components/Banner/Banner"
 import Row from "../components/Rows/Row"
 
 function Movie({ mediaType }) {
+	const [isMovieDetail, setIsMovieDetail] = useState(false)
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
 	const moreURL = `https://api.themoviedb.org/3/${media}/${id}/similar?api_key=a7267ab151b0952338cfa979a59790b6&language=en-US&page=1`
@@ -21,12 +22,18 @@ function Movie({ mediaType }) {
 		}
 		fetchData()
 	}, [])
+	console.log("Movie detail", isMovieDetail)
 
 	return (
 		<>
 			{selectedMovie ? (
 				<>
-					<Banner movie={selectedMovie} setMovie={setSelectedMovie} />
+					<Banner
+						movie={selectedMovie}
+						setMovie={setSelectedMovie}
+						setIsMovieDetail={setIsMovieDetail}
+						isMovieDetail={isMovieDetail}
+					/>
 					<Row title="More Like This" url={moreURL} />
 				</>
 			) : (

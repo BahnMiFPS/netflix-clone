@@ -1,12 +1,13 @@
 import { Add, PlayArrow, PlusOne } from "@mui/icons-material"
-import { Button, Chip, Paper, Typography, useTheme } from "@mui/material"
+import { Box, Button, Chip, Paper, Typography, useTheme } from "@mui/material"
+import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useOutletContext, useParams } from "react-router-dom"
 import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
 import GenreChip from "./GenreChip"
-function Banner({ movie, setMovie, movieId }) {
+function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const theme = useTheme()
 	const paperTheme = {
 		background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%) ,url(https://image.tmdb.org/t/p/original/${movie.backdrop_path}) center center`,
@@ -33,7 +34,7 @@ function Banner({ movie, setMovie, movieId }) {
 	const bannerVignette = {
 		background: "linear-gradient(180deg,transparent 10%,rgb(20, 20, 20))",
 		width: "100%",
-		height: "200px",
+		height: "400px",
 	}
 	const title = {
 		fontSize: "40px",
@@ -73,6 +74,7 @@ function Banner({ movie, setMovie, movieId }) {
 	const handleAddToList = useOutletContext()
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
+	const [casts, setCasts] = useState(null)
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -81,10 +83,23 @@ function Banner({ movie, setMovie, movieId }) {
 				)
 				setMovie(response.data)
 				setSelectedMovie(response.data)
+				setIsMovieDetail(true)
 			} catch (error) {}
 		}
+		if (isMovieDetail === true) {
+			const fetchMovieCast = async () => {
+				try {
+					const response = await axios.get(
+						`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+					)
+					console.log("moviecast response", response)
+					setCasts(response.data.cast)
+				} catch (error) {}
+			}
+			fetchMovieCast()
+		}
 		fetchData()
-	}, [id || media])
+	}, [id || media, isMovieDetail])
 	console.log("sdafasdf", movie)
 	return !movie ? (
 		<Typography color="primary">Doesnt have movie</Typography>
@@ -96,9 +111,7 @@ function Banner({ movie, setMovie, movieId }) {
 						<Typography style={title}>
 							{movie.title ? movie.title : movie.name}
 						</Typography>
-						{/* {movie.genres_ids.slice(0, 3).map((elem) => (
-            <Chip>{elem.name}</Chip>
-          ))} */}
+
 						<Typography style={desc}>
 							{movie.overview.length > 150
 								? `${movie.overview.slice(0, 150)}...`
@@ -140,9 +153,34 @@ function Banner({ movie, setMovie, movieId }) {
 								My List
 							</Button>
 						</div>
-						{/* I cant get movie T_T */}
-						{/* <GenreChip movieGenre={movie.genres} /> */}
+						<Box marginTop={2}>
+							{casts ? (
+								<Typography variant="body1" color="GrayText">
+									Cast:{" "}
+									<span className="cast-name">
+										{casts
+											.splice(0, 4)
+											.map((cast) => cast.name)
+											.join(", ")}
+									</span>
+									<span className="cast-name">, and more...</span>
+								</Typography>
+							) : (
+								""
+							)}
+							{movie.genres ? (
+								<Typography variant="body1" color="GrayText">
+									Genres:{" "}
+									<span className="cast-name">
+										{movie.genres.map((genre) => genre.name).join(", ")}.
+									</span>
+								</Typography>
+							) : (
+								""
+							)}
+						</Box>
 					</div>
+
 					<div style={bannerVignette}></div>
 				</div>
 			</Paper>

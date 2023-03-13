@@ -66,7 +66,6 @@ export default function SearchBar() {
 					onChange={(e) => {
 						setSearchParams({ q: e.target.value })
 					}}
-					name="q"
 				/>
 			</Search>
 		</>

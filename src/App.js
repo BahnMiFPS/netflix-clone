@@ -4,6 +4,7 @@ import { useAuth } from "./contexts/AuthContext"
 import Browse from "./pages/Browse"
 import Documentary from "./pages/Documentary"
 import Home from "./pages/Home"
+import HomePage from "./pages/HomePage"
 import Login from "./pages/Login"
 import Movie from "./pages/Movie"
 import Movies from "./pages/Movies"
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/home",
-				element: <Browse />,
+				element: <HomePage />,
 			},
 			{
 				path: "/:media/:id",
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
 			{
 				path: "/mylist",
 				element: <MyList />,
+			},
+			{
+				path: "/browse",
+				element: <Browse />,
 			},
 		],
 	},

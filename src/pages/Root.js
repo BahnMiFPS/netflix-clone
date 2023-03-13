@@ -9,6 +9,7 @@ import {
 import Footer from "../components/Footer/Footer"
 import Navbar from "../components/Navbar/Navbar"
 import { useAuth } from "../contexts/AuthContext"
+import Browse from "./Browse"
 import "./css/Root.css"
 import SearchPage from "./SearchPage"
 
@@ -43,7 +44,7 @@ function Root() {
 			<Box sx={style}>
 				<Navbar />
 				{searchParam ? (
-					<SearchPage searchParam={searchParam} />
+					<Browse searchParam={searchParam} />
 				) : (
 					<Outlet context={handleAddToList} />
 				)}

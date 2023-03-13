@@ -1,13 +1,17 @@
-import { Container, Typography } from "@mui/material"
+import { Container, Grid, Typography } from "@mui/material"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom"
 import apiService from "../api/apiService"
 import { API_KEY } from "../api/requests"
+import MultipleSelectPlaceholder from "../components/MultipleSelectPlaceholder"
 import MovieCard from "../components/Rows/MovieCard"
 import theme from "../utils/theme"
 import "./css/Search.css"
 function SearchPage({ searchParam }) {
+	let [searchParams, setSearchParams] = useSearchParams()
 	const [movies, setMovies] = useState([])
+	const [genreList, setGenreList] = useState(null)
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -20,14 +24,38 @@ function SearchPage({ searchParam }) {
 				console.log(error)
 			}
 		}
+		const fetchGenreList = async () => {
+			try {
+				const response = await axios.get(
+					`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+				)
+				setGenreList(response.data.genres)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		fetchGenreList()
+
 		fetchData()
 	}, [searchParam])
 
+	console.log(genreList)
 	return (
 		<Container maxWidth sx={{ marginTop: theme.spacing(10) }}>
-			<Typography variant="h5" fontWeight="500" color="white">
-				Keyword: {searchParam}
-			</Typography>
+			<Grid
+				container
+				flexDirection="row"
+				justifyContent="space-between"
+				alignItems="baseline"
+			>
+				<Typography variant="h5" fontWeight="500" color="white">
+					Keyword: {searchParam}
+				</Typography>
+				<MultipleSelectPlaceholder
+					genreList={genreList}
+					setSearchParams={setSearchParams}
+				/>
+			</Grid>
 			<div className="search-content">
 				{movies
 					.filter((movie) => movie.poster_path != null)

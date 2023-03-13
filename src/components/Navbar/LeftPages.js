@@ -12,6 +12,7 @@ const pages = [
 	{ name: "Home", link: "home" },
 	{ name: "Movies", link: "movies" },
 	{ name: "TV Shows", link: "tv" },
+	{ name: "Browse", link: "browse" },
 	{ name: "My List", link: "mylist" },
 ]
 

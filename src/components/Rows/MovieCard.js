@@ -1,6 +1,6 @@
 import React from "react"
 import "./style.css"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { Box, Card, CardActionArea, Container, Typography } from "@mui/material"
 import theme from "../../utils/theme"
 
@@ -14,6 +14,7 @@ function MovieCard({
 	isCastCard,
 	castName,
 }) {
+	let [searchParams, setSearchParams] = useSearchParams()
 	if (!isCastCard) {
 		return (
 			<Link
@@ -36,7 +37,11 @@ function MovieCard({
 		return (
 			<div className="cast-container">
 				<Card className="movie-card cast-card">
-					<CardActionArea>
+					<CardActionArea
+						onClick={(e) => {
+							setSearchParams({ q: castName })
+						}}
+					>
 						{/* <div className="movie-card-clone">
 			<div>{title} </div>
 			<img src={img} alt={title} className="movie-card-clone-img" />

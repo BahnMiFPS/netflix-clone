@@ -1,4 +1,4 @@
-import { Add, PlayArrow, PlusOne } from "@mui/icons-material"
+import { Add, CalendarMonth, PlayArrow, PlusOne } from "@mui/icons-material"
 import {
 	Box,
 	Button,
@@ -10,7 +10,12 @@ import {
 } from "@mui/material"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { Link, useOutletContext, useParams } from "react-router-dom"
+import {
+	Link,
+	useOutletContext,
+	useParams,
+	useSearchParams,
+} from "react-router-dom"
 import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
@@ -20,8 +25,6 @@ function Banner({
 	setMovie,
 	movieId,
 	setIsMovieDetail,
-	setOnMovieDetailPage,
-	onMovieDetailPage,
 	isMovieDetail,
 	casts,
 }) {
@@ -88,7 +91,7 @@ function Banner({
 		textTransform: "capitalize",
 	}
 	const infos = {
-		padding: "5px 10px",
+		padding: theme.spacing(1),
 		marginRight: theme.spacing(1),
 	}
 	//## Movie id
@@ -99,7 +102,11 @@ function Banner({
 	const handleAddToList = useOutletContext()
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
-
+	console.log("from Banner asd", movie)
+	let [searchParams, setSearchParams] = useSearchParams()
+	const handleClick = (e) => {
+		setSearchParams({ q: e.target.innerText })
+	}
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -127,10 +134,9 @@ function Banner({
 						<Grid
 							sx={{
 								display: "flex",
-								alignItems: "flex-end",
+								alignItems: "center",
 								textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
 								flexWrap: "wrap",
-
 								gap: 1,
 								marginBottom: theme.spacing(2),
 							}}
@@ -142,9 +148,17 @@ function Banner({
 									marginRight: theme.spacing(1),
 								}}
 							/>
+							{movie.release_date ? (
+								<Chip
+									icon={<CalendarMonth fontSize="small" />}
+									label={movie.release_date}
+								/>
+							) : (
+								""
+							)}
 							{movie.genres
 								? movie.genres.map((genre) => (
-										<Paper style={infos}>{genre.name}</Paper>
+										<Chip label={genre.name} onClick={handleClick} />
 								  ))
 								: ""}
 							{/* <Paper style={infos}>{movie.year.slice(0, 4)}</Paper> */}

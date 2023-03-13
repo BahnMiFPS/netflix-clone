@@ -25,24 +25,17 @@ function YoutubeEmbed({ embedId, title, publishedAt }) {
 			/>
 			<CardContent
 				sx={{
-					height: "100%",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-between",
 				}}
 			>
-				<Grid
-					container
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-between",
-					}}
-				>
-					<Typography gutterBottom variant="h6" component="div">
-						{title}
-					</Typography>
-					<Typography variant="body2" color="text.secondary">
-						Published Date: {date}
-					</Typography>
-				</Grid>
+				<Typography gutterBottom variant="h7" component="div">
+					{title}
+				</Typography>
+				<Typography variant="body2" color="text.secondary">
+					Published Date: {date}
+				</Typography>
 			</CardContent>
 		</Card>
 	)

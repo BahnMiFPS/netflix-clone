@@ -1,5 +1,13 @@
 import { Add, PlayArrow, PlusOne } from "@mui/icons-material"
-import { Box, Button, Chip, Paper, Typography, useTheme } from "@mui/material"
+import {
+	Box,
+	Button,
+	Chip,
+	Grid,
+	Paper,
+	Typography,
+	useTheme,
+} from "@mui/material"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useOutletContext, useParams } from "react-router-dom"
@@ -7,6 +15,7 @@ import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
 import GenreChip from "./GenreChip"
+import ImdbRating from "./ImdbRating"
 function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const theme = useTheme()
 	const paperTheme = {
@@ -29,6 +38,7 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const bannerDetails = {
 		position: "absolute",
 		bottom: "50px",
+
 		margin: theme.spacing(10, 5),
 	}
 	const bannerVignette = {
@@ -45,9 +55,10 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	}
 	const desc = {
 		display: "flex",
+
 		alignItems: "center",
-		marginBottom: theme.spacing(2),
 		textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
+		marginBottom: theme.spacing(2),
 	}
 	const playBtn = {
 		fontWeight: 700,
@@ -65,6 +76,10 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 			backgroundColor: "rgba(109, 109, 110, 0.4)",
 		},
 		textTransform: "capitalize",
+	}
+	const infos = {
+		padding: "5px 10px",
+		marginRight: theme.spacing(1),
 	}
 	//## Movie id
 
@@ -168,16 +183,31 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 							) : (
 								""
 							)}
-							{movie.genres ? (
-								<Typography variant="body1" color="GrayText">
-									Genres:{" "}
-									<span className="cast-name">
-										{movie.genres.map((genre) => genre.name).join(", ")}.
-									</span>
-								</Typography>
-							) : (
-								""
-							)}
+
+							<Grid
+								sx={{
+									display: "flex",
+									alignItems: "flex-end",
+									textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
+									flexWrap: "wrap",
+									marginTop: "1rem",
+									gap: 1,
+								}}
+							>
+								<ImdbRating
+									rating={movie.vote_average.toFixed(1)}
+									style={{
+										textShadow: "initial",
+										marginRight: theme.spacing(1),
+									}}
+								/>
+								{movie.genres
+									? movie.genres.map((genre) => (
+											<Paper style={infos}>{genre.name}</Paper>
+									  ))
+									: ""}
+								{/* <Paper style={infos}>{movie.year.slice(0, 4)}</Paper> */}
+							</Grid>
 						</Box>
 					</div>
 

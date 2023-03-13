@@ -14,12 +14,12 @@ import { Link, useOutletContext, useParams } from "react-router-dom"
 import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
-import GenreChip from "./GenreChip"
 import ImdbRating from "./ImdbRating"
 function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const theme = useTheme()
 	const paperTheme = {
-		background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%) ,url(https://image.tmdb.org/t/p/original/${movie.backdrop_path}) center center`,
+		background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%) ,url(https://image.tmdb.org/t/p/original/${movie.backdrop_path}) center center`,
+		boxShadow: "none",
 		backgroundSize: "cover",
 		position: "relative",
 		height: "650px",
@@ -27,12 +27,13 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 			backgroundColor: "black",
 			content: "",
 		},
-		marginBottom: theme.spacing(4),
+		marginBottom: theme.spacing(1),
 	}
 	const bannerContent = {
 		position: "absolute",
 		width: "100%",
 		bottom: 0,
+		boxShadow: "none",
 	}
 
 	const bannerDetails = {

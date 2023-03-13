@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap");
-
+.row {
+	margin-top: 0;
+}
 .movie-card {
 	background-color: #222;
 	background-image: linear-gradient(rgba(0, 0, 0, 0), #000);

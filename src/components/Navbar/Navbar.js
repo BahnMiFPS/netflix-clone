@@ -21,11 +21,15 @@ function Navbar() {
 		transition: ".4s",
 		backgroundColor: navBackground ? "rgb(20, 20, 20)" : "rgba(0, 0, 0, 0)",
 	}
-
+	const toolbarStyle = {
+		display: "flex",
+		alignItems: "center",
+		justifyContents: "center",
+	}
 	return (
 		<AppBar position="fixed" style={navAppbar} elevation={0} component="nav">
 			<Container maxWidth>
-				<Toolbar disableGutters>
+				<Toolbar disableGutters style={toolbarStyle}>
 					<Logo />
 					<LeftPages />
 					<RightPages />

@@ -1,7 +1,8 @@
 import React from "react"
 import "./style.css"
 import { Link } from "react-router-dom"
-import { Card, CardActionArea, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, Container, Typography } from "@mui/material"
+import theme from "../../utils/theme"
 
 function MovieCard({
 	key,
@@ -15,7 +16,10 @@ function MovieCard({
 }) {
 	if (!isCastCard) {
 		return (
-			<Link to={`/${mediaType === "tv" ? "tv" : "movie"}/${id}`}>
+			<Link
+				className="movie-card-container"
+				to={`/${mediaType === "tv" ? "tv" : "movie"}/${id}`}
+			>
 				<Card className="movie-card">
 					<CardActionArea>
 						{/* <div className="movie-card-clone">

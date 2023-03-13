@@ -9,10 +9,12 @@
 	transition-duration: 0.2s;
 	height: 250px;
 	border-radius: 4px !important;
-	margin-right: 10px;
+	margin-right: 15px;
 	transition: transform 0.45s;
 }
 
+.movie-card-container {
+}
 .movie-card-img {
 	height: 100%;
 }

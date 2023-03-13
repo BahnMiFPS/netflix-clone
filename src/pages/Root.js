@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import React, { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import {
 	Navigate,
 	Outlet,
@@ -17,13 +17,22 @@ function Root() {
 	let [params] = useSearchParams()
 	console.log("from root", params.get("q"))
 	let searchParam = params.get("q")
-	const [favoriteMovies, setFavoriteMovies] = useState([])
 
+	const [favoriteMovies, setFavoriteMovies] = useState([])
 	const handleAddToList = (movie) => {
-		const newFavorite = [...favoriteMovies, movie]
+		const newFavorite = [...favoriteMovies, { ...movie }]
 		setFavoriteMovies(newFavorite)
-		localStorage.setItem("my-list", JSON.stringify(favoriteMovies))
+		window.localStorage.setItem("my-list", JSON.stringify(favoriteMovies))
 	}
+
+	useEffect(() => {
+		const myList = JSON.parse(window.localStorage.getItem("my-list"))
+		if (myList) {
+			setFavoriteMovies(myList)
+		} else setFavoriteMovies([])
+	}, [])
+	console.log(favoriteMovies)
+
 	const style = {
 		height: "100vh",
 	}

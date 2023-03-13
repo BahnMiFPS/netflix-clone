@@ -15,7 +15,16 @@ import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
 import ImdbRating from "./ImdbRating"
-function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
+function Banner({
+	movie,
+	setMovie,
+	movieId,
+	setIsMovieDetail,
+	setOnMovieDetailPage,
+	onMovieDetailPage,
+	isMovieDetail,
+	casts,
+}) {
 	const theme = useTheme()
 	const paperTheme = {
 		background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%) ,url(https://image.tmdb.org/t/p/original/${movie.backdrop_path}) center center`,
@@ -90,7 +99,7 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const handleAddToList = useOutletContext()
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
-	const [casts, setCasts] = useState(null)
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -102,18 +111,7 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 				setIsMovieDetail(true)
 			} catch (error) {}
 		}
-		if (isMovieDetail === true) {
-			const fetchMovieCast = async () => {
-				try {
-					const response = await axios.get(
-						`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
-					)
-					console.log("moviecast response", response)
-					setCasts(response.data.cast)
-				} catch (error) {}
-			}
-			fetchMovieCast()
-		}
+
 		fetchData()
 	}, [id || media, isMovieDetail])
 	console.log("sdafasdf", movie)
@@ -175,7 +173,7 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 									Cast:{" "}
 									<span className="cast-name">
 										{casts
-											.splice(0, 4)
+											.slice(0, 4)
 											.map((cast) => cast.name)
 											.join(", ")}
 									</span>

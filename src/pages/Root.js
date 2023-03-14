@@ -38,9 +38,8 @@ function Root() {
 			alert("Movie already exists in your list!")
 			return
 		}
-
 		// Otherwise, add the new movie to the array
-		const newFavorite = [...favoriteMovies, { ...movie }]
+		const newFavorite = [...itemsFromStorage, { ...movie }]
 		setFavoriteMovies(newFavorite)
 
 		// Update the localStorage with the new array of items

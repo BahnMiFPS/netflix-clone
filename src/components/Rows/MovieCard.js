@@ -20,7 +20,6 @@ function MovieCard({
 	isCastCard,
 	castName,
 }) {
-	console.log(rating)
 	let [searchParams, setSearchParams] = useSearchParams()
 	if (!isCastCard) {
 		return (

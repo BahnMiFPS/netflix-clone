@@ -6,6 +6,8 @@ import MovieCard from "./MovieCard"
 import "./style.css"
 import { ChevronLeft, ForkLeft } from "@mui/icons-material"
 import { Box } from "@mui/material"
+import BlurDiv from "./BlurDiv"
+import theme from "../../utils/theme"
 function Row({ title, url, isSearch, casts, isCastCard }) {
 	const [movies, setMovies] = useState(null)
 	useEffect(() => {
@@ -13,35 +15,67 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 			try {
 				const response = await axios.get(url)
 				const responseMovies = response.data.results
-				setMovies(responseMovies)
+				if (response.data.results[0].poster_path) {
+					setMovies(responseMovies)
+				}
 			} catch (error) {
 				console.error(error)
 			}
 		}
 		getTrendingMovies()
-	}, [])
+	}, [url])
+	console.log("movies from row.js", movies)
 
+	const [navBackground, setNavBackground] = useState(true)
+
+	function handleScroll(event) {
+		const slider = event.target
+		const scrollLeft = slider.scrollLeft
+		console.log(scrollLeft)
+		if (scrollLeft < 200) {
+			setNavBackground(true)
+		} else {
+			setNavBackground(false)
+		}
+	}
+	const navAppbar = {
+		position: "absolute",
+		right: 0,
+		height: "250px",
+		width: "25px",
+		padding: theme.spacing(0, 3),
+		backgroundImage: navBackground
+			? `linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%)`
+			: `linear-gradient(to right, rgba(255,255,255,0) 100%, #fff 100%)`,
+		transition: ".4s",
+	}
+	console.log(navBackground)
 	if (!casts) {
 		return (
 			<div className="row">
-				<div className="row-title">{title}</div>
 				{movies ? (
 					<>
-						<div className="row-posters">
+						<div className="row-title">{title}</div>
+						<div className="row-posters" onScroll={handleScroll}>
 							{movies.map((movie) =>
 								movie.media_type !== null ? (
-									<MovieCard
-										key={movie.id}
-										id={movie.id}
-										rating={movie.vote_average}
-										img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-										title={movie.name}
-										mediaType={movie.media_type}
-									/>
+									movie.poster_path ? (
+										<MovieCard
+											key={movie.id}
+											id={movie.id}
+											rating={movie.vote_average}
+											img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+											title={movie.name}
+											mediaType={movie.media_type}
+										/>
+									) : (
+										""
+									)
 								) : (
 									<></>
 								)
 							)}
+							<div id="slide" style={navAppbar}></div>
 						</div>
 					</>
 				) : (
@@ -50,13 +84,13 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 			</div>
 		)
 	} else {
-		return (
+		return casts !== null ? (
 			<div className="row">
 				<Box className="row-title" marginBottom={0}>
 					Cast
 				</Box>
 				<>
-					<div className="row-posters">
+					<div className="row-posters cast-posters">
 						{casts.map((cast) =>
 							cast.profile_path ? (
 								<MovieCard
@@ -72,6 +106,8 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 					</div>
 				</>
 			</div>
+		) : (
+			<></>
 		)
 	}
 }

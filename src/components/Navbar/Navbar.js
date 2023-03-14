@@ -25,6 +25,7 @@ function Navbar() {
 		display: "flex",
 		alignItems: "center",
 		justifyContents: "center",
+		textAlign: "center",
 	}
 	return (
 		<AppBar position="fixed" style={navAppbar} elevation={0} component="nav">

@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material"
+import { Container, Grid, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import MovieCard from "../components/Rows/MovieCard"
 import theme from "../utils/theme"
@@ -17,20 +17,22 @@ function MyList() {
 			<Typography variant="h5" fontWeight="500" color="white">
 				My List
 			</Typography>
-			<div className="search-content">
-				{favoriteMovies
-					.filter((movie) => movie.poster_path != null)
-					.map((movie) => (
-						<MovieCard
-							key={movie.id}
-							id={movie.id}
-							rating={movie.vote_average}
-							img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-							title={movie.original_title}
-							mediaType={movie.media_type}
-						/>
-					))}
-			</div>
+			<Grid Container>
+				<div className="search-content">
+					{favoriteMovies
+						.filter((movie) => movie.poster_path != null)
+						.map((movie) => (
+							<MovieCard
+								key={movie.id}
+								id={movie.id}
+								rating={movie.vote_average}
+								img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+								title={movie.original_title}
+								mediaType={movie.media_type}
+							/>
+						))}
+				</div>
+			</Grid>
 		</Container>
 	)
 }

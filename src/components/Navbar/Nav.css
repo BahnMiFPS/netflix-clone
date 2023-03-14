@@ -1,6 +1,9 @@
 .nav-logo {
 	width: 90px;
-	margin-right: 1rem;
+	margin: 0;
+}
+.logo-icon-btn {
+	height: 100%;
 }
 a {
 	all: unset;

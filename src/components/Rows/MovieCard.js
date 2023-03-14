@@ -1,8 +1,16 @@
 import React from "react"
 import "./style.css"
 import { Link, useSearchParams } from "react-router-dom"
-import { Box, Card, CardActionArea, Container, Typography } from "@mui/material"
+import {
+	Box,
+	Card,
+	CardActionArea,
+	Container,
+	Grid,
+	Typography,
+} from "@mui/material"
 import theme from "../../utils/theme"
+import CircularProgressWithLabel from "./CircularProgressWithLabel"
 
 function MovieCard({
 	key,
@@ -36,17 +44,12 @@ function MovieCard({
 	} else {
 		return (
 			<div className="cast-container">
-				<Card className="movie-card cast-card">
+				<Card className="movie-card cast-card cast-container">
 					<CardActionArea
 						onClick={(e) => {
 							setSearchParams({ q: castName })
 						}}
 					>
-						{/* <div className="movie-card-clone">
-			<div>{title} </div>
-			<img src={img} alt={title} className="movie-card-clone-img" />
-			<div>{title} </div>
-		</div> */}
 						<img className="movie-card-img" src={img} alt={title} />
 					</CardActionArea>
 				</Card>

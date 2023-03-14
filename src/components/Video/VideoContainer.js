@@ -4,7 +4,8 @@ import theme from "../../utils/theme"
 import YoutubeEmbed from "./YoutubeEmbed"
 
 function VideoContainer({ videos }) {
-	if (videos) {
+	console.log("Video Container from", videos)
+	if (videos["0"] !== null) {
 		return (
 			<Container
 				maxWidth="lg"

@@ -28,6 +28,8 @@ function SearchPage({ searchParam }) {
 	let [searchParams, setSearchParams] = useSearchParams()
 	const [movies, setMovies] = useState([])
 	const [genreList, setGenreList] = useState(null)
+	const [errorMessage, setErrorMessage] = useState(null)
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -35,7 +37,16 @@ function SearchPage({ searchParam }) {
 					`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchParam}`
 				)
 				const data = await response.json()
-				setMovies(Object.values(data)[1])
+				console.log("data from search / searchpage.js", data.results)
+				if (data.results.length > 1) {
+					setMovies(data.results)
+					setErrorMessage(null)
+				} else {
+					setErrorMessage(
+						"Data Not Found. Try Search again with another keyword."
+					)
+					setMovies(data.results)
+				}
 			} catch (error) {
 				console.log(error)
 			}
@@ -74,7 +85,14 @@ function SearchPage({ searchParam }) {
 					setSearchParams={setSearchParams}
 				/>
 			</Grid>
-			<SearchContent movies={movies} />
+			{errorMessage ? (
+				<Typography variant="h5" color={"error"}>
+					{" "}
+					{errorMessage}
+				</Typography>
+			) : (
+				<SearchContent movies={movies} />
+			)}
 		</Container>
 	)
 }

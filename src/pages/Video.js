@@ -45,7 +45,7 @@ function Video() {
 	return (
 		<>
 			{url ? (
-				<div className="player-wrapper" sx={{ marginTop: theme.spacing(8) }}>
+				<div className="player-wrapper">
 					<ReactPlayer
 						url={url}
 						className="react-player"

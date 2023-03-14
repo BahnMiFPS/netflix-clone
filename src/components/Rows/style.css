@@ -44,6 +44,9 @@
 	gap: 1rem;
 }
 
+.cast-container {
+	height: 300px;
+}
 .row-posters::-webkit-scrollbar {
 	display: none;
 }

@@ -38,20 +38,23 @@ function Movie({ mediaType }) {
 			const response = await axios.get(
 				`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
 			)
-
-			setCasts(response.data.cast)
+			if (response.data.cast[0].profile_path) {
+				setCasts(response.data.cast)
+			}
 		}
 		const fetchMovieVideo = async () => {
 			const response = await axios.get(
 				`https://api.themoviedb.org/3/${media}/${id}/videos?api_key=${API_KEY}&language=en-US`
 			)
-
-			setVideos(response.data.results)
+			if (response.data.results[0].id) {
+				setVideos(response.data.results)
+			}
 		}
 		fetchData()
 		fetchMovieCast()
 		fetchMovieVideo()
 	}, [id])
+	console.log("this is cast from movie", casts)
 	return (
 		<>
 			{selectedMovie ? (
@@ -63,10 +66,15 @@ function Movie({ mediaType }) {
 						isMovieDetail={isMovieDetail}
 						setOnMovieDetailPage={setOnMovieDetailPage}
 						onMovieDetailPage={onMovieDetailPage}
-						casts={casts}
 					/>
-					<Row url={moreURL} casts={casts} isCastCard={isCastCard} />
-					<VideoContainer videos={videos} />
+					{casts ? (
+						<Row url={moreURL} casts={casts} isCastCard={isCastCard} />
+					) : (
+						""
+					)}
+
+					{videos !== null ? <VideoContainer videos={videos} /> : ""}
+
 					<Row title="More Like This" url={moreURL} />
 				</>
 			) : (

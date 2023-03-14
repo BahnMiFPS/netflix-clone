@@ -38,7 +38,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 	}
 	const navAppbar = {
 		position: "absolute",
-		right: 0,
+		right: theme.spacing(2),
 		height: "250px",
 		width: "50px",
 		padding: theme.spacing(0, 6),

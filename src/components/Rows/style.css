@@ -64,8 +64,22 @@
 	gap: 1rem;
 }
 
+.cast-posters {
+	width: 100%;
+}
+
 .cast-container {
-	height: 300px;
+	display: flex;
+	flex-direction: column;
+	height: 350px;
+	width: 180px;
+}
+
+.cast-container .MuiCardHeader-title {
+	font-size: 1.2rem;
+}
+.cast-container .MuiCardHeader-subheader {
+	font-size: 0.7rem;
 }
 .row-posters::-webkit-scrollbar {
 	display: none;

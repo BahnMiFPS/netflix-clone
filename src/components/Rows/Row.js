@@ -47,6 +47,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 			: `linear-gradient(to right, rgba(255,255,255,0) 100%, #fff 100%)`,
 		transition: ".4s",
 	}
+
 	if (!casts) {
 		return (
 			<div className="row">
@@ -76,7 +77,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 						</div>
 					</>
 				) : (
-					<div> no has movie</div>
+					""
 				)}
 			</div>
 		)
@@ -91,6 +92,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 						{casts.map((cast) =>
 							cast.profile_path ? (
 								<MovieCard
+									castCharacter={cast.character}
 									castName={cast.name}
 									isCastCard={isCastCard}
 									key={cast.id}

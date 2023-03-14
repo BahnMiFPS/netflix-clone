@@ -5,6 +5,7 @@ import {
 	Box,
 	Card,
 	CardActionArea,
+	CardHeader,
 	CircularProgress,
 	Typography,
 } from "@mui/material"
@@ -19,6 +20,7 @@ function MovieCard({
 	mediaType,
 	isCastCard,
 	castName,
+	castCharacter,
 }) {
 	let [searchParams, setSearchParams] = useSearchParams()
 	if (!isCastCard) {
@@ -94,10 +96,19 @@ function MovieCard({
 					>
 						<img className="movie-card-img" src={img} alt={title} />
 					</CardActionArea>
+					<CardHeader
+						title={castName}
+						subheader={castCharacter}
+						className="cast-card-header"
+					/>
+					{/* <Typography
+						className="class-title"
+						color="white"
+						textAlign={"center"}
+					>
+						{castName}
+					</Typography> */}
 				</Card>
-				<Typography className="class-title" color="white" textAlign={"center"}>
-					{castName}
-				</Typography>
 			</div>
 		)
 	}

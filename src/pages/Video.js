@@ -19,11 +19,8 @@ function Video() {
 			const data = await apiService.get(
 				`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`
 			)
-			// setVideo(data)
 			const result = data.data.videos.results
-			// let propSymb = Object.getOwnPropertySymbols(result)
-			// console.log(propSymb.length)
-			// console.log(result[propSymb.length])
+
 			const length = Object.keys(result).length
 			const lastResult = result[length - 1]
 

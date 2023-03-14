@@ -10,8 +10,6 @@ export default function MultipleSelectPlaceholder({
 	setSearchParams,
 	searchParams,
 }) {
-	console.log("from multipleselect", genreList)
-
 	return (
 		<FormControl sx={{ minWidth: "200px" }}>
 			<InputLabel id="demo-simple-select-label">Genres</InputLabel>

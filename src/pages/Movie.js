@@ -54,7 +54,6 @@ function Movie({ mediaType }) {
 		fetchMovieCast()
 		fetchMovieVideo()
 	}, [id])
-	console.log("this is cast from movie", casts)
 	return (
 		<>
 			{selectedMovie ? (

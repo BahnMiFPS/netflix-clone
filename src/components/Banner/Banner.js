@@ -100,13 +100,15 @@ function Banner({
 	//   if (movie.genre_ids[i] === )
 	// }
 	const handleAddToList = useOutletContext()
+
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
-	console.log("from Banner asd", movie)
+
 	let [searchParams, setSearchParams] = useSearchParams()
 	const handleClick = (e) => {
 		setSearchParams({ q: e.target.innerText })
 	}
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {

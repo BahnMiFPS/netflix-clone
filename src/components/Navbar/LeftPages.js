@@ -70,13 +70,6 @@ function LeftPages({}) {
 
 			<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 				{pages.map((page) => (
-					// <Button
-					// 	key={page.name}
-					// 	onClick={handleCloseNavMenu}
-					// 	sx={{ my: 2, color: "white", display: "block" }}
-					// >
-					// 	<Link to={page.link}>{page.name}</Link>
-					// </Button>
 					<NavLink to={page.link} key={page.name} className="page-link">
 						<Typography variant="caption" fontWeight="700">
 							{page.name}

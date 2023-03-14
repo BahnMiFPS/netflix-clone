@@ -37,7 +37,6 @@ function SearchPage({ searchParam }) {
 					`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchParam}`
 				)
 				const data = await response.json()
-				console.log("data from search / searchpage.js", data.results)
 				if (data.results.length > 1) {
 					setMovies(data.results)
 					setErrorMessage(null)
@@ -47,9 +46,7 @@ function SearchPage({ searchParam }) {
 					)
 					setMovies(data.results)
 				}
-			} catch (error) {
-				console.log(error)
-			}
+			} catch (error) {}
 		}
 		const fetchGenreList = async () => {
 			try {
@@ -57,16 +54,13 @@ function SearchPage({ searchParam }) {
 					`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
 				)
 				setGenreList(response.data.genres)
-			} catch (error) {
-				console.log(error)
-			}
+			} catch (error) {}
 		}
 		fetchGenreList()
 
 		fetchData()
 	}, [searchParam])
 
-	console.log("movie card from search page", movies)
 	return (
 		<Container maxWidth sx={{ marginTop: theme.spacing(10) }}>
 			<Grid

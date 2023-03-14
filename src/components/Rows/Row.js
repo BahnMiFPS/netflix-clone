@@ -24,14 +24,12 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 		}
 		getTrendingMovies()
 	}, [url])
-	console.log("movies from row.js", movies)
 
 	const [navBackground, setNavBackground] = useState(true)
 
 	function handleScroll(event) {
 		const slider = event.target
 		const scrollLeft = slider.scrollLeft
-		console.log(scrollLeft)
 		if (scrollLeft < 200) {
 			setNavBackground(true)
 		} else {
@@ -43,13 +41,12 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 		right: 0,
 		height: "250px",
 		width: "25px",
-		padding: theme.spacing(0, 3),
+		padding: theme.spacing(0, 5),
 		backgroundImage: navBackground
-			? `linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%)`
+			? `linear-gradient(to right, rgba(255,255,255,0) 0%, #000 100%)`
 			: `linear-gradient(to right, rgba(255,255,255,0) 100%, #fff 100%)`,
 		transition: ".4s",
 	}
-	console.log(navBackground)
 	if (!casts) {
 		return (
 			<div className="row">

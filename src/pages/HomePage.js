@@ -22,9 +22,7 @@ function HomePage() {
 			}
 
 			fetchData()
-		} catch (error) {
-			console.log(error)
-		}
+		} catch (error) {}
 	}, [])
 	// return movie ? <Banner movie={movie} /> : <div>Loading</div>
 	// searchParam ? (

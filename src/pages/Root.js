@@ -19,10 +19,45 @@ function Root() {
 	let searchParam = params.get("q")
 
 	const [favoriteMovies, setFavoriteMovies] = useState([])
+
+	// const handleAddToList = (movie) => {
+	// 	const newFavorite = [...favoriteMovies, { ...movie }]
+	// 	setFavoriteMovies(newFavorite)
+	// 	window.localStorage.setItem("my-list", JSON.stringify(favoriteMovies))
+	// }
 	const handleAddToList = (movie) => {
+		// Get the current items from localStorage
+		const itemsFromStorage =
+			JSON.parse(window.localStorage.getItem("my-list")) || []
+
+		// Check if the movie already exists in the array
+		const movieExists = itemsFromStorage.find((item) => item.id === movie.id)
+
+		// If the movie already exists, skip adding it
+		if (movieExists) {
+			alert("Movie already exists in your list!")
+			return
+		}
+
+		// Otherwise, add the new movie to the array
 		const newFavorite = [...favoriteMovies, { ...movie }]
 		setFavoriteMovies(newFavorite)
-		window.localStorage.setItem("my-list", JSON.stringify(favoriteMovies))
+
+		// Update the localStorage with the new array of items
+		window.localStorage.setItem("my-list", JSON.stringify(newFavorite))
+	}
+
+	const handleRemoveFromList = (movie) => {
+		// Get the current items from localStorage
+		const itemsFromStorage =
+			JSON.parse(window.localStorage.getItem("my-list")) || []
+
+		// Filter out the movie with the matching id
+		const updatedItems = itemsFromStorage.filter((item) => item.id !== movie.id)
+
+		// Update the state and localStorage with the new array of items
+		setFavoriteMovies(updatedItems)
+		window.localStorage.setItem("my-list", JSON.stringify(updatedItems))
 	}
 
 	useEffect(() => {
@@ -31,7 +66,6 @@ function Root() {
 			setFavoriteMovies(myList)
 		} else setFavoriteMovies([])
 	}, [])
-	console.log(favoriteMovies)
 
 	const style = {
 		height: "100vh",

@@ -8,21 +8,15 @@ const apiService = axios.create({
 
 apiService.interceptors.request.use(
 	(request) => {
-		console.log("Start Request", request)
 		return request
 	},
-	function (error) {
-		console.log("Request Error", error)
-	}
+	function (error) {}
 )
 
 apiService.interceptors.response.use(
 	(response) => {
-		console.log(" Response", response)
 		return response
 	},
-	function (error) {
-		console.log("Response Error", error)
-	}
+	function (error) {}
 )
 export default apiService

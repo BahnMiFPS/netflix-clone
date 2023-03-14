@@ -15,14 +15,29 @@
 
 .movie-card-container {
 	height: 100%;
+	position: relative;
 }
 .movie-card-img {
 	height: 100%;
 }
+.circular-progress {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	right: 0;
+	transform: translate(-20%, 20%);
+	z-index: 2;
 
+	border-radius: 50%;
+}
 .movie-card:hover {
 }
-
+.progress-background {
+	background-color: rgb(64, 64, 64);
+	z-index: 1;
+}
 .row-title {
 	color: white;
 	font-size: 30px;

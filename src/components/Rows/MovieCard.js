@@ -5,12 +5,10 @@ import {
 	Box,
 	Card,
 	CardActionArea,
-	Container,
-	Grid,
+	CircularProgress,
 	Typography,
 } from "@mui/material"
-import theme from "../../utils/theme"
-import CircularProgressWithLabel from "./CircularProgressWithLabel"
+import { Percent } from "@mui/icons-material"
 
 function MovieCard({
 	key,
@@ -22,6 +20,7 @@ function MovieCard({
 	isCastCard,
 	castName,
 }) {
+	console.log(rating)
 	let [searchParams, setSearchParams] = useSearchParams()
 	if (!isCastCard) {
 		return (
@@ -39,6 +38,50 @@ function MovieCard({
 						<img className="movie-card-img" src={img} alt={title} />
 					</CardActionArea>
 				</Card>
+				{rating !== 0 || null ? (
+					<>
+						<Box className="circular-progress ">
+							<CircularProgress variant="determinate" value={rating} />
+							<Box
+								sx={{
+									top: 0,
+									left: 0,
+									bottom: 0,
+									right: 0,
+									position: "absolute",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+								}}
+							>
+								<Typography
+									variant="caption"
+									component="div"
+									color="text.primary"
+									sx={{ position: "relative" }}
+								>
+									{`${Math.round(rating * 10)}`}
+									<Typography
+										component={"span"}
+										fontSize={"8px"}
+										sx={{ position: "relative", top: -2 }}
+									>
+										<Percent fontSize="xs" />
+									</Typography>
+								</Typography>
+							</Box>
+						</Box>
+						<div className="circular-progress progress-background">
+							<CircularProgress
+								value={rating * 10}
+								variant="determinate"
+								thickness={5}
+							/>
+						</div>
+					</>
+				) : (
+					""
+				)}
 			</Link>
 		)
 	} else {

@@ -6,10 +6,7 @@ import YoutubeEmbed from "./YoutubeEmbed"
 function VideoContainer({ videos }) {
 	if (videos["0"] !== null) {
 		return (
-			<Container
-				maxWidth="lg"
-				sx={{ marginBottom: theme.spacing(4), padding: 0, marginLeft: 0 }}
-			>
+			<Container maxWidth sx={{ marginBottom: theme.spacing(4) }}>
 				<div className="row-title related-videos" maxWidth>
 					Related Videos
 				</div>

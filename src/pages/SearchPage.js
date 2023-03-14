@@ -41,9 +41,7 @@ function SearchPage({ searchParam }) {
 					setMovies(data.results)
 					setErrorMessage(null)
 				} else {
-					setErrorMessage(
-						"Data Not Found. Try Search again with another keyword."
-					)
+					setErrorMessage("Something went wrong. Try searching again.")
 					setMovies(data.results)
 				}
 			} catch (error) {}

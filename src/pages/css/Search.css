@@ -3,7 +3,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: auto;
-	gap: 0.5rem;
+	gap: 2rem;
 }
 
 .page-title {

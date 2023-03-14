@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
-import { requests } from "../../api/requests"
 import MovieCard from "./MovieCard"
 import "./style.css"
-import { ChevronLeft, ForkLeft } from "@mui/icons-material"
-import { Box } from "@mui/material"
-import BlurDiv from "./BlurDiv"
+import { Box, Container } from "@mui/material"
 import theme from "../../utils/theme"
 function Row({ title, url, isSearch, casts, isCastCard }) {
 	const [movies, setMovies] = useState(null)
@@ -38,7 +35,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 	}
 	const navAppbar = {
 		position: "absolute",
-		right: theme.spacing(2),
+		right: theme.spacing(1),
 		height: "250px",
 		width: "50px",
 		padding: theme.spacing(0, 6),
@@ -50,61 +47,65 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 
 	if (!casts) {
 		return (
-			<div className="row">
-				{movies ? (
-					<>
-						<div className="row-title">{title}</div>
-						<div className="row-posters" onScroll={handleScroll}>
-							{movies.map((movie) =>
-								movie.media_type !== null ? (
-									movie.poster_path ? (
-										<MovieCard
-											key={movie.id}
-											id={movie.id}
-											rating={movie.vote_average}
-											img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-											title={movie.name}
-											mediaType={movie.media_type}
-										/>
+			<Container maxWidth>
+				<div className="row">
+					{movies ? (
+						<>
+							<div className="row-title">{title}</div>
+							<div className="row-posters" onScroll={handleScroll}>
+								{movies.map((movie) =>
+									movie.media_type !== null ? (
+										movie.poster_path ? (
+											<MovieCard
+												key={movie.id}
+												id={movie.id}
+												rating={movie.vote_average}
+												img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+												title={movie.name}
+												mediaType={movie.media_type}
+											/>
+										) : (
+											""
+										)
 									) : (
-										""
+										<></>
 									)
+								)}
+								<div id="slide" style={navAppbar}></div>
+							</div>
+						</>
+					) : (
+						""
+					)}
+				</div>
+			</Container>
+		)
+	} else {
+		return casts !== null ? (
+			<Container maxWidth>
+				<div className="row">
+					<Box className="row-title" marginBottom={0}>
+						Cast
+					</Box>
+					<>
+						<div className="row-posters cast-posters">
+							{casts.map((cast) =>
+								cast.profile_path ? (
+									<MovieCard
+										castCharacter={cast.character}
+										castName={cast.name}
+										isCastCard={isCastCard}
+										key={cast.id}
+										img={`https://image.tmdb.org/t/p/w342${cast.profile_path}`}
+									/>
 								) : (
 									<></>
 								)
 							)}
-							<div id="slide" style={navAppbar}></div>
 						</div>
 					</>
-				) : (
-					""
-				)}
-			</div>
-		)
-	} else {
-		return casts !== null ? (
-			<div className="row">
-				<Box className="row-title" marginBottom={0}>
-					Cast
-				</Box>
-				<>
-					<div className="row-posters cast-posters">
-						{casts.map((cast) =>
-							cast.profile_path ? (
-								<MovieCard
-									castCharacter={cast.character}
-									castName={cast.name}
-									isCastCard={isCastCard}
-									key={cast.id}
-									img={`https://image.tmdb.org/t/p/w342${cast.profile_path}`}
-								/>
-							) : (
-								<></>
-							)
-						)}
-					</div>
-				</>
-			</div>
+				</div>
+			</Container>
 		) : (
 			<></>
 		)

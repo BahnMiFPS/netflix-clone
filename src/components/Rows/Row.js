@@ -40,10 +40,10 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 		position: "absolute",
 		right: 0,
 		height: "250px",
-		width: "25px",
-		padding: theme.spacing(0, 5),
+		width: "50px",
+		padding: theme.spacing(0, 6),
 		backgroundImage: navBackground
-			? `linear-gradient(to right, rgba(255,255,255,0) 0%, #000 100%)`
+			? `linear-gradient(to right, rgb(20,20,20,0) 0%, rgb(20,20,20,1) 100%)`
 			: `linear-gradient(to right, rgba(255,255,255,0) 100%, #fff 100%)`,
 		transition: ".4s",
 	}

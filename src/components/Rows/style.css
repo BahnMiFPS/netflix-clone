@@ -9,11 +9,11 @@
 	transition-duration: 0.2s;
 	height: 250px;
 	border-radius: 4px !important;
-	margin-right: 15px;
 	transition: transform 0.45s;
 }
 
 .movie-card-container {
+	height: 100%;
 }
 .movie-card-img {
 	height: 100%;
@@ -41,6 +41,7 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
+	gap: 1rem;
 }
 
 .row-posters::-webkit-scrollbar {

@@ -1,4 +1,12 @@
-import { Container, Grid, Typography } from "@mui/material"
+import {
+	Box,
+	Card,
+	CardContent,
+	CardHeader,
+	Container,
+	Grid,
+	Typography,
+} from "@mui/material"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
@@ -6,8 +14,16 @@ import apiService from "../api/apiService"
 import { API_KEY } from "../api/requests"
 import MultipleSelectPlaceholder from "../components/MultipleSelectPlaceholder"
 import MovieCard from "../components/Rows/MovieCard"
+import SearchContent from "../components/SearchContent/SearchContent"
 import theme from "../utils/theme"
 import "./css/Search.css"
+const desc = {
+	display: "flex",
+
+	alignItems: "center",
+	textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
+	marginBottom: theme.spacing(2),
+}
 function SearchPage({ searchParam }) {
 	let [searchParams, setSearchParams] = useSearchParams()
 	const [movies, setMovies] = useState([])
@@ -39,7 +55,7 @@ function SearchPage({ searchParam }) {
 		fetchData()
 	}, [searchParam])
 
-	console.log(genreList)
+	console.log("movie card from search page", movies)
 	return (
 		<Container maxWidth sx={{ marginTop: theme.spacing(10) }}>
 			<Grid
@@ -56,20 +72,7 @@ function SearchPage({ searchParam }) {
 					setSearchParams={setSearchParams}
 				/>
 			</Grid>
-			<div className="search-content">
-				{movies
-					.filter((movie) => movie.poster_path != null)
-					.map((movie) => (
-						<MovieCard
-							key={movie.id}
-							id={movie.id}
-							rating={movie.vote_average}
-							img={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-							title={movie.original_title}
-							mediaType={movie.media_type}
-						/>
-					))}
-			</div>
+			<SearchContent movies={movies} />
 		</Container>
 	)
 }

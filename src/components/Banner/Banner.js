@@ -204,22 +204,6 @@ function Banner({
 								My List
 							</Button>
 						</div>
-						<Box marginTop={2}>
-							{casts ? (
-								<Typography variant="body1" color="GrayText">
-									Cast:{" "}
-									<span className="cast-name">
-										{casts
-											.slice(0, 4)
-											.map((cast) => cast.name)
-											.join(", ")}
-									</span>
-									<span className="cast-name">, and more...</span>
-								</Typography>
-							) : (
-								""
-							)}
-						</Box>
 					</div>
 
 					<div style={bannerVignette}></div>

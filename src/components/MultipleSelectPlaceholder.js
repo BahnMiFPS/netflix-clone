@@ -3,7 +3,7 @@ import * as React from "react"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
-import { InputLabel } from "@mui/material"
+import { Grid, InputLabel } from "@mui/material"
 
 export default function MultipleSelectPlaceholder({
 	genreList,

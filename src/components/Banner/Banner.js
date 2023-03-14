@@ -1,4 +1,10 @@
-import { Add, CalendarMonth, PlayArrow, PlusOne } from "@mui/icons-material"
+import {
+	Add,
+	CalendarMonth,
+	PlayArrow,
+	PlusOne,
+	Remove,
+} from "@mui/icons-material"
 import {
 	Box,
 	Button,
@@ -94,12 +100,9 @@ function Banner({
 		padding: theme.spacing(1),
 		marginRight: theme.spacing(1),
 	}
-	//## Movie id
 
-	// for (let i = 0; i < movie.genre_ids.length; i++) {
-	//   if (movie.genre_ids[i] === )
-	// }
-	const handleAddToList = useOutletContext()
+	const [handleAddToList, movieExists, setMovieExists, handleRemoveFromList] =
+		useOutletContext()
 
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
@@ -108,21 +111,39 @@ function Banner({
 	const handleClick = (e) => {
 		setSearchParams({ q: e.target.innerText })
 	}
-
+	const [itemsGotFromStorage, setitemsGotFromStorage] = useState([])
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const response = await apiService.get(
 					`https://api.themoviedb.org/3/${media}/${id}?api_key=${API_KEY}&language=en-US`
 				)
+				const itemsFromStorage =
+					JSON.parse(window.localStorage.getItem("my-list")) || []
+				setitemsGotFromStorage(itemsFromStorage)
 				setMovie(response.data)
 				setSelectedMovie(response.data)
 				setIsMovieDetail(true)
+
+				// Check if the movie already exists in the array
 			} catch (error) {}
 		}
 
 		fetchData()
-	}, [id || media, isMovieDetail])
+	}, [id, media, isMovieDetail, itemsGotFromStorage])
+
+	function getExisted() {
+		const movieExists = itemsGotFromStorage.find((item) => item.id === movie.id)
+		// If the movie already exists, skip adding it
+		if (movieExists) {
+			setMovieExists(true)
+			return
+		} else {
+			setMovieExists(false)
+		}
+	}
+	getExisted()
+
 	return !movie ? (
 		<Typography color="primary">Doesnt have movie</Typography>
 	) : (
@@ -196,15 +217,27 @@ function Banner({
 							>
 								Trailer
 							</Button>
-							<Button
-								style={listBtn}
-								variant="contained"
-								startIcon={<Add />}
-								size="large"
-								onClick={() => handleAddToList(movie)}
-							>
-								My List
-							</Button>
+							{movieExists ? (
+								<Button
+									style={listBtn}
+									variant="contained"
+									startIcon={<Remove />}
+									size="large"
+									onClick={() => handleRemoveFromList(movie)}
+								>
+									Remove
+								</Button>
+							) : (
+								<Button
+									style={listBtn}
+									variant="contained"
+									startIcon={<Add />}
+									size="large"
+									onClick={() => handleAddToList(movie)}
+								>
+									My List
+								</Button>
+							)}
 						</div>
 					</div>
 

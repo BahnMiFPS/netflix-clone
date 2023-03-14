@@ -17,6 +17,7 @@ function Root() {
 	let auth = useAuth()
 	let [params] = useSearchParams()
 	let searchParam = params.get("q")
+	const [movieExists, setMovieExists] = useState(false)
 
 	const [favoriteMovies, setFavoriteMovies] = useState([])
 
@@ -35,12 +36,13 @@ function Root() {
 
 		// If the movie already exists, skip adding it
 		if (movieExists) {
-			alert("Movie already exists in your list!")
+			setMovieExists(true)
 			return
 		}
 		// Otherwise, add the new movie to the array
 		const newFavorite = [...itemsFromStorage, { ...movie }]
 		setFavoriteMovies(newFavorite)
+		setMovieExists(false)
 
 		// Update the localStorage with the new array of items
 		window.localStorage.setItem("my-list", JSON.stringify(newFavorite))
@@ -79,7 +81,14 @@ function Root() {
 				{searchParam ? (
 					<Browse searchParam={searchParam} />
 				) : (
-					<Outlet context={handleAddToList} />
+					<Outlet
+						context={[
+							handleAddToList,
+							movieExists,
+							setMovieExists,
+							handleRemoveFromList,
+						]}
+					/>
 				)}
 				<Footer />
 			</Box>

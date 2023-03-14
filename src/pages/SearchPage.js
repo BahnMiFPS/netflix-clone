@@ -63,6 +63,8 @@ function SearchPage({ searchParam }) {
 				flexDirection="row"
 				justifyContent="space-between"
 				alignItems="baseline"
+				xs={12}
+				gap={2}
 			>
 				<Typography variant="h5" fontWeight="500" color="white">
 					Keyword: {searchParam}

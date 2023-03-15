@@ -5,10 +5,8 @@ import apiService from "../api/apiService"
 import { API_KEY } from "../api/requests"
 import ReactPlayer from "react-player/lazy"
 
-import theme from "../utils/theme"
 import "./css/Video.css"
 function Video() {
-	const navigate = useNavigate()
 	const { id } = useParams()
 	const [video, setVideo] = useState(null)
 	const [videoSite, setVideoSite] = useState(null)

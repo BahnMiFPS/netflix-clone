@@ -1,29 +1,13 @@
-import {
-	Box,
-	Card,
-	CardContent,
-	CardHeader,
-	Container,
-	Grid,
-	Typography,
-} from "@mui/material"
+import { Container, Grid, Typography } from "@mui/material"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import apiService from "../api/apiService"
 import { API_KEY } from "../api/requests"
 import MultipleSelectPlaceholder from "../components/MultipleSelectPlaceholder"
-import MovieCard from "../components/Rows/MovieCard"
 import SearchContent from "../components/SearchContent/SearchContent"
 import theme from "../utils/theme"
 import "./css/Search.css"
-const desc = {
-	display: "flex",
 
-	alignItems: "center",
-	textShadow: "1px 1px 2px rgb(0 0 0 / 100%)",
-	marginBottom: theme.spacing(2),
-}
 function SearchPage({ searchParam }) {
 	let [searchParams, setSearchParams] = useSearchParams()
 	const [movies, setMovies] = useState([])
@@ -33,18 +17,21 @@ function SearchPage({ searchParam }) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await fetch(
+				const response = await axios.get(
 					`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchParam}`
 				)
-				const data = await response.json()
-				if (data.results.length > 1) {
-					setMovies(data.results)
+				const data = response.data.results
+				console.log(data)
+				if (data.length > 1) {
+					setMovies(data)
 					setErrorMessage(null)
 				} else {
 					setErrorMessage("Something went wrong. Try searching again.")
-					setMovies(data.results)
+					setMovies(data)
 				}
-			} catch (error) {}
+			} catch (error) {
+				setErrorMessage(error)
+			}
 		}
 		const fetchGenreList = async () => {
 			try {
@@ -55,7 +42,6 @@ function SearchPage({ searchParam }) {
 			} catch (error) {}
 		}
 		fetchGenreList()
-
 		fetchData()
 	}, [searchParam])
 
@@ -79,7 +65,6 @@ function SearchPage({ searchParam }) {
 			</Grid>
 			{errorMessage ? (
 				<Typography variant="h5" color={"error"}>
-					{" "}
 					{errorMessage}
 				</Typography>
 			) : (

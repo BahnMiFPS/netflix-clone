@@ -29,13 +29,11 @@ function Navbar() {
 	}
 	return (
 		<AppBar position="fixed" style={navAppbar} elevation={0} component="nav">
-			<Container maxWidth>
-				<Toolbar disableGutters style={toolbarStyle}>
-					<Logo />
-					<LeftPages />
-					<RightPages />
-				</Toolbar>
-			</Container>
+			<Toolbar disableGutters style={toolbarStyle}>
+				<Logo />
+				<LeftPages />
+				<RightPages />
+			</Toolbar>
 		</AppBar>
 	)
 }

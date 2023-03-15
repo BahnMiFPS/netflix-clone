@@ -114,7 +114,7 @@ function Banner({
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await apiService.get(
+				const response = await axios.get(
 					`https://api.themoviedb.org/3/${media}/${id}?api_key=${API_KEY}&language=en-US`
 				)
 

@@ -12,7 +12,6 @@ import {
 import { Percent } from "@mui/icons-material"
 
 function MovieCard({
-	key,
 	id,
 	rating,
 	img,

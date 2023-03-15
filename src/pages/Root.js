@@ -40,10 +40,10 @@ function Root() {
 		window.localStorage.setItem("my-list", JSON.stringify(newFavorite))
 	}
 
-	const handleRemoveFromList = (movie) => {
+	const handleRemoveFromList = (movie, favoriteMoviesGetFromMyList) => {
 		// Get the current items from localStorage
-		const itemsFromStorage =
-			JSON.parse(window.localStorage.getItem("my-list")) || []
+		const itemsFromStorage = favoriteMoviesGetFromMyList
+
 		// Filter out the movie with the matching id
 		const updatedItems = itemsFromStorage.filter((item) => item.id !== movie.id)
 
@@ -65,7 +65,14 @@ function Root() {
 				{searchParam ? (
 					<Browse searchParam={searchParam} />
 				) : (
-					<Outlet context={[handleAddToList, handleRemoveFromList]} />
+					<Outlet
+						context={[
+							handleAddToList,
+							handleRemoveFromList,
+							favoriteMovies,
+							setFavoriteMovies,
+						]}
+					/>
 				)}
 				<Footer />
 			</Box>

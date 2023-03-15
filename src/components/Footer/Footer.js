@@ -24,13 +24,13 @@ const Footer = () => {
 			<Grid container spacing={6}>
 				<Grid item xs={12}>
 					<Box>
-						<Link To="https://www.facebook.com/tunflix">
+						<Link to="https://www.facebook.com/tunflix">
 							<Facebook className="socialIcon" fontSize="large" />
 						</Link>
-						<Link To="https://www.instagram.com/tunflix">
+						<Link to="https://www.instagram.com/tunflix">
 							<Instagram className="socialIcon" fontSize="large" />
 						</Link>
-						<Link To="https://www.twitter.com/tunflix">
+						<Link to="https://www.twitter.com/tunflix">
 							<Twitter className="socialIcon" fontSize="large" />
 						</Link>
 					</Box>

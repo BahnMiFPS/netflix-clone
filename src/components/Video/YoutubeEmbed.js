@@ -19,7 +19,6 @@ function YoutubeEmbed({ embedId, title, publishedAt }) {
 			<CardMedia
 				component="iframe"
 				src={`https://www.youtube.com/embed/${embedId}`}
-				allow="autoPlay"
 				allowFullScreen
 				frameBorder={0}
 			/>

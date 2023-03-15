@@ -7,9 +7,7 @@ function VideoContainer({ videos }) {
 	if (videos["0"] !== null) {
 		return (
 			<Container maxWidth sx={{ marginBottom: theme.spacing(4) }}>
-				<div className="row-title related-videos" maxWidth>
-					Related Videos
-				</div>
+				<div className="row-title related-videos">Related Videos</div>
 				<Grid
 					container
 					spacing={{ xs: 2, md: 3 }}

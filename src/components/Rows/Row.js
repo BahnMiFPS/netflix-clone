@@ -99,7 +99,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 										img={`https://image.tmdb.org/t/p/w342${cast.profile_path}`}
 									/>
 								) : (
-									<></>
+									""
 								)
 							)}
 						</div>

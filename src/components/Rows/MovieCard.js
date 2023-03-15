@@ -100,13 +100,6 @@ function MovieCard({
 						subheader={castCharacter}
 						className="cast-card-header"
 					/>
-					{/* <Typography
-						className="class-title"
-						color="white"
-						textAlign={"center"}
-					>
-						{castName}
-					</Typography> */}
 				</Card>
 			</div>
 		)

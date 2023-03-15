@@ -21,7 +21,6 @@ function SearchPage({ searchParam }) {
 					`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchParam}`
 				)
 				const data = response.data.results
-				console.log(data)
 				if (data.length > 1) {
 					setMovies(data)
 					setErrorMessage(null)

@@ -164,7 +164,11 @@ function Banner({
 							)}
 							{movie.genres
 								? movie.genres.map((genre) => (
-										<Chip label={genre.name} onClick={handleClick} />
+										<Chip
+											key={genre.id}
+											label={genre.name}
+											onClick={handleClick}
+										/>
 								  ))
 								: ""}
 							{/* <Paper style={infos}>{movie.year.slice(0, 4)}</Paper> */}

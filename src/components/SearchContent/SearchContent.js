@@ -39,7 +39,6 @@ function SearchContent({ movies }) {
 									<Typography
 										variant="subtitle1"
 										color="text.secondary"
-										component="Text"
 										sx={{}}
 									>
 										{movie.overview.length > 150

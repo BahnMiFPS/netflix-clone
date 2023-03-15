@@ -36,7 +36,9 @@ function Banner({
 }) {
 	const theme = useTheme()
 	const paperTheme = {
-		background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%) ,url(https://image.tmdb.org/t/p/original/${movie.backdrop_path}) center center`,
+		backgroundColor: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%)`,
+		backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
+		backgroundPosition: "center",
 		boxShadow: "none",
 		backgroundSize: "cover",
 		position: "relative",
@@ -95,10 +97,6 @@ function Banner({
 			backgroundColor: "rgba(109, 109, 110, 0.4)",
 		},
 		textTransform: "capitalize",
-	}
-	const infos = {
-		padding: theme.spacing(1),
-		marginRight: theme.spacing(1),
 	}
 
 	const [handleAddToList, movieExists, setMovieExists, handleRemoveFromList] =

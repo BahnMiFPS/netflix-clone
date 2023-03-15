@@ -46,13 +46,12 @@ function SearchPage({ searchParam }) {
 	}, [searchParam])
 
 	return (
-		<Container maxWidth sx={{ marginTop: theme.spacing(10) }}>
+		<Container sx={{ marginTop: theme.spacing(10) }}>
 			<Grid
 				container
 				flexDirection="row"
 				justifyContent="space-between"
 				alignItems="baseline"
-				xs={12}
 				gap={2}
 			>
 				<Typography variant="h5" fontWeight="500" color="white">

@@ -11,13 +11,18 @@ import Navbar from "../components/Navbar/Navbar"
 import { useAuth } from "../contexts/AuthContext"
 import Browse from "./Browse"
 import "./css/Root.css"
-
+const itemsFromStorage =
+	JSON.parse(window.localStorage.getItem("my-list")) || []
 function Root() {
 	let auth = useAuth()
 	let [params] = useSearchParams()
 	let searchParam = params.get("q")
 
 	const [favoriteMovies, setFavoriteMovies] = useState([])
+
+	useEffect(() => {
+		setFavoriteMovies(itemsFromStorage)
+	}, [])
 
 	const handleAddToList = (movie) => {
 		const itemsFromStorage =

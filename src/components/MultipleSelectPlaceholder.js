@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useState } from "react"
 
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
@@ -10,25 +10,27 @@ export default function MultipleSelectPlaceholder({
 	setSearchParams,
 	searchParams,
 }) {
+	const [chosenValue, setChosenValue] = useState("")
 	return (
 		<FormControl sx={{ minWidth: "200px" }}>
 			<InputLabel id="demo-simple-select-label">Genres</InputLabel>
 			<Select
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
-				value={searchParams}
 				label="Genres"
 				onChange={(e) => {
 					setSearchParams({ q: e.target.value })
+					setChosenValue(e.target.value)
 				}}
+				value={chosenValue}
 			>
-				{genreList ? (
-					genreList.map((genre) => (
-						<MenuItem value={genre.name}>{genre.name}</MenuItem>
-					))
-				) : (
-					<></>
-				)}
+				{genreList
+					? genreList.map((genre) => (
+							<MenuItem key={genre.id} value={genre.name}>
+								{genre.name}
+							</MenuItem>
+					  ))
+					: ""}
 			</Select>
 		</FormControl>
 	)

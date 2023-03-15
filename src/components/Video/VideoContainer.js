@@ -6,7 +6,7 @@ import YoutubeEmbed from "./YoutubeEmbed"
 function VideoContainer({ videos }) {
 	if (videos["0"] !== null) {
 		return (
-			<Container maxWidth sx={{ marginBottom: theme.spacing(4) }}>
+			<Container maxWidth="false" sx={{ marginBottom: theme.spacing(4) }}>
 				<div className="row-title related-videos">Related Videos</div>
 				<Grid
 					container

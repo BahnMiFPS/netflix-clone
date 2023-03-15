@@ -32,7 +32,7 @@ function MyList() {
 	// }, [favoriteMovies])
 
 	return (
-		<Container maxWidth sx={{ marginTop: theme.spacing(10) }}>
+		<Container maxWidth="false" sx={{ marginTop: theme.spacing(10) }}>
 			<Typography variant="h5" fontWeight="500" color="white">
 				My List
 			</Typography>

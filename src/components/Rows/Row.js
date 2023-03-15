@@ -47,7 +47,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 
 	if (!casts) {
 		return (
-			<Container maxWidth>
+			<Container maxWidth="false">
 				<div className="row">
 					{movies ? (
 						<>
@@ -82,7 +82,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 		)
 	} else {
 		return casts !== null ? (
-			<Container maxWidth>
+			<Container maxWidth="false">
 				<div className="row">
 					<Box className="row-title" marginBottom={0}>
 						Cast

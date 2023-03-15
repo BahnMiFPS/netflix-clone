@@ -111,16 +111,13 @@ function Banner({
 	const handleClick = (e) => {
 		setSearchParams({ q: e.target.innerText })
 	}
-	const [itemsGotFromStorage, setitemsGotFromStorage] = useState([])
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const response = await apiService.get(
 					`https://api.themoviedb.org/3/${media}/${id}?api_key=${API_KEY}&language=en-US`
 				)
-				const itemsFromStorage =
-					JSON.parse(window.localStorage.getItem("my-list")) || []
-				setitemsGotFromStorage(itemsFromStorage)
+
 				setMovie(response.data)
 				setSelectedMovie(response.data)
 				setIsMovieDetail(true)
@@ -130,19 +127,7 @@ function Banner({
 		}
 
 		fetchData()
-	}, [id, media, isMovieDetail, itemsGotFromStorage])
-
-	function getExisted() {
-		const movieExists = itemsGotFromStorage.find((item) => item.id === movie.id)
-		// If the movie already exists, skip adding it
-		if (movieExists) {
-			setMovieExists(true)
-			return
-		} else {
-			setMovieExists(false)
-		}
-	}
-	getExisted()
+	}, [id, media, isMovieDetail])
 
 	return !movie ? (
 		<Typography color="primary">Doesnt have movie</Typography>
@@ -217,7 +202,16 @@ function Banner({
 							>
 								Trailer
 							</Button>
-							{movieExists ? (
+							<Button
+								style={listBtn}
+								variant="contained"
+								startIcon={<Add />}
+								size="large"
+								onClick={() => handleAddToList(movie)}
+							>
+								My List
+							</Button>
+							{/* {movieExists ? (
 								<Button
 									style={listBtn}
 									variant="contained"
@@ -237,7 +231,7 @@ function Banner({
 								>
 									My List
 								</Button>
-							)}
+							)} */}
 						</div>
 					</div>
 

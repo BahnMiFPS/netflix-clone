@@ -18,7 +18,7 @@ import VideoContainer from "../components/Video/VideoContainer"
 import YoutubeEmbed from "../components/Video/YoutubeEmbed"
 import theme from "../utils/theme"
 import "./css/Search.css"
-function Movie({ mediaType }) {
+function MovieDetail({ mediaType }) {
 	const [isMovieDetail, setIsMovieDetail] = useState(false)
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
@@ -90,4 +90,4 @@ function Movie({ mediaType }) {
 	)
 }
 
-export default Movie
+export default MovieDetail

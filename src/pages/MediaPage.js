@@ -56,8 +56,8 @@ function MediaPage() {
 	) : movie ? (
 		<>
 			<Banner movie={movie} setMovie={setMovie} movieId={movie.id} />
-			{requestObject.map((category) => {
-				return <Row title={category.name} url={category.url} />
+			{requestObject.map((category, index) => {
+				return <Row title={category.name} url={category.url} key={index} />
 			})}
 		</>
 	) : (

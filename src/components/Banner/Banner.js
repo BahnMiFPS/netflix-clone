@@ -104,9 +104,11 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const handleClick = (e) => {
 		setSearchParams({ q: e.target.innerText })
 	}
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				if (!id || !media) return
 				const response = await axios.get(
 					`https://api.themoviedb.org/3/${media}/${id}?api_key=${API_KEY}&language=en-US`
 				)
@@ -114,8 +116,6 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 				setMovie(response.data)
 				setSelectedMovie(response.data)
 				setIsMovieDetail(true)
-
-				// Check if the movie already exists in the array
 			} catch (error) {}
 		}
 

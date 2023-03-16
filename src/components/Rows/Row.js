@@ -34,6 +34,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 				setIsLoading(false)
 			} catch (error) {
 				console.error(error)
+				setIsLoading(false)
 			}
 		}
 		getTrendingMovies()
@@ -77,13 +78,13 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 
 	return (
 		<Container maxWidth="false">
-			<div className="row">
-				<div className="row-title">{title}</div>
-				{isLoading ? (
-					<Box sx={{ display: "flex", justifyContent: "center" }}>
-						<CircularProgress />
-					</Box>
-				) : (
+			{isLoading ? (
+				<Box sx={{ display: "flex", justifyContent: "center" }}>
+					<CircularProgress />
+				</Box>
+			) : movies.length > 1 ? (
+				<div className="row">
+					<div className="row-title">{title}</div>
 					<div className="row-posters" onScroll={handleScroll}>
 						{movies.map(
 							(movie) =>
@@ -101,8 +102,10 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 						)}
 						<RowFade fadeBackgroundImage={fadeBackgroundImage}></RowFade>
 					</div>
-				)}
-			</div>
+				</div>
+			) : (
+				""
+			)}
 		</Container>
 	)
 }

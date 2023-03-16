@@ -1,6 +1,6 @@
 # VuFlix - Netflix Clone
 
-VuFlix - Netflix Clone is a frontend project based on Netflix UI: built with ReactJS.
+This is a frontend project based on Netflix UI: built with ReactJS.
 
 ## Built with
 
@@ -8,6 +8,9 @@ VuFlix - Netflix Clone is a frontend project based on Netflix UI: built with Rea
 <b>Dependencies:</b>React-router, Yup, Formik, Axios.
 
 </ul>
+
+Demo: https://bahnmifps-netflix.netlify.app/
+Source Code: https://github.com/BahnMiFPS/netflix-clone
 
 ## UI
 

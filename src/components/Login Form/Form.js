@@ -44,8 +44,8 @@ function Form() {
 	}
 	const formik = useFormik({
 		initialValues: {
-			email: "as@g.c",
-			password: "asdasdas",
+			email: "",
+			password: "",
 		},
 		validationSchema: Yup.object({
 			email: Yup.string()

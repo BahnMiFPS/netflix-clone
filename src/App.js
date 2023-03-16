@@ -1,11 +1,10 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Login from "./pages/Login"
 import MovieDetail from "./pages/MovieDetail"
 import MyList from "./pages/MyList"
 import Root from "./pages/Root"
 import Video from "./pages/Video"
 import MediaPage from "./pages/MediaPage"
-import SearchPage from "./pages/SearchPage"
 import Browse from "./pages/Browse"
 
 const router = createBrowserRouter([

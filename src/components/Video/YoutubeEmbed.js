@@ -1,6 +1,6 @@
 import React from "react"
 import "./style.css"
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material"
+import { Card, CardContent, CardMedia, Typography } from "@mui/material"
 
 function YoutubeEmbed({ embedId, title, publishedAt }) {
 	function convertISOToUS(dateString) {
@@ -11,8 +11,6 @@ function YoutubeEmbed({ embedId, title, publishedAt }) {
 
 		return `${month}/${day}/${year}`
 	}
-
-	const date = convertISOToUS(publishedAt)
 
 	return (
 		<Card sx={{ height: "100%" }}>
@@ -33,7 +31,7 @@ function YoutubeEmbed({ embedId, title, publishedAt }) {
 					{title}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					Published Date: {date}
+					Published Date: {convertISOToUS(publishedAt)}
 				</Typography>
 			</CardContent>
 		</Card>

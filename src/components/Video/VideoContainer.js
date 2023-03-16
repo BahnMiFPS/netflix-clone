@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material"
+import { Container, Grid } from "@mui/material"
 import React from "react"
 import theme from "../../utils/theme"
 import YoutubeEmbed from "./YoutubeEmbed"

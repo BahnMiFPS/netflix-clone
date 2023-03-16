@@ -49,10 +49,11 @@ function Root() {
 
 	const handleRemoveFromList = (movie, favoriteMoviesGetFromMyList) => {
 		// Get the current items from localStorage
-		const itemsFromStorage = favoriteMoviesGetFromMyList
 
 		// Filter out the movie with the matching id
-		const updatedItems = itemsFromStorage.filter((item) => item.id !== movie.id)
+		const updatedItems = favoriteMoviesGetFromMyList.filter(
+			(item) => item.id !== movie.id
+		)
 
 		// Update the state and localStorage with the new array of items
 		setFavoriteMovies(updatedItems)

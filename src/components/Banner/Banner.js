@@ -185,19 +185,21 @@ function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 								startIcon={<PlayArrow />}
 								size="large"
 								to={`/video/${(!movieId && id) || movieId}`}
-								// disabled={movie.video ? "false" : "true"}
 							>
 								Trailer
 							</Button>
+
 							<Button
-								style={listBtn}
 								variant="contained"
-								startIcon={<Add />}
-								size="large"
-								onClick={() => handleAddToList(movie)}
-								disabled={movieExistsFromBanner}
+								style={listBtn}
+								startIcon={movieExistsFromBanner ? <Remove /> : <Add />}
+								onClick={() =>
+									movieExistsFromBanner
+										? handleRemoveFromList(movie, favoriteMovies)
+										: handleAddToList(movie)
+								}
 							>
-								My List
+								{movieExistsFromBanner ? "Remove from List" : "Add to List"}
 							</Button>
 						</div>
 					</div>

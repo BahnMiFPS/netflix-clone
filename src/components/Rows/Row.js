@@ -5,23 +5,23 @@ import { styled } from "@mui/material/styles"
 import MovieCard from "./MovieCard"
 import theme from "../../utils/theme"
 
-const NavAppbar = styled("div")(({ navBackground }) => ({
+const RowFade = styled("div")(({ fadeBackgroundImage }) => ({
 	position: "absolute",
 	right: theme.spacing(1),
 	height: "250px",
 	width: "50px",
 	padding: theme.spacing(0, 6),
-	backgroundImage: navBackground
+	backgroundImage: fadeBackgroundImage
 		? `linear-gradient(to right, rgb(20,20,20,0) 0%, rgb(20,20,20,1) 100%)`
 		: `linear-gradient(to right, rgba(255,255,255,0) 100%, #fff 100%)`,
-	opacity: navBackground ? 1 : 0, // Set opacity to 1 when navBackground is true, 0 otherwise
+	opacity: fadeBackgroundImage ? 1 : 0, // Set opacity to 1 when fadeBackgroundImage is true, 0 otherwise
 	transition: "background-image .4s ease-in-out, opacity .4s ease-in-out", // Add transition for opacity
 }))
 
 function Row({ title, url, isSearch, casts, isCastCard }) {
 	const [movies, setMovies] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
-	const [navBackground, setNavBackground] = useState(true)
+	const [fadeBackgroundImage, setFadeBackgroundImage] = useState(true)
 
 	useEffect(() => {
 		async function getTrendingMovies() {
@@ -43,9 +43,9 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 		const slider = event.target
 		const scrollLeft = slider.scrollLeft
 		if (scrollLeft < 200) {
-			setNavBackground(true)
+			setFadeBackgroundImage(true)
 		} else {
-			setNavBackground(false)
+			setFadeBackgroundImage(false)
 		}
 	}
 
@@ -99,7 +99,7 @@ function Row({ title, url, isSearch, casts, isCastCard }) {
 									/>
 								)
 						)}
-						<NavAppbar navBackground={navBackground}></NavAppbar>
+						<RowFade fadeBackgroundImage={fadeBackgroundImage}></RowFade>
 					</div>
 				)}
 			</div>

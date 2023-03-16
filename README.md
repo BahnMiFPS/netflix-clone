@@ -22,6 +22,10 @@ Source Code: https://github.com/BahnMiFPS/netflix-clone
 
 ![Home](screenshots/moviedetail.png)
 
+### Favourite List
+
+![Home](screenshots/mylist.png)
+
 ### Player
 
 ![Home](screenshots/player.png)

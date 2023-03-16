@@ -13,13 +13,13 @@ import {
 } from "@mui/material"
 
 import React from "react"
-import Logo from "../assets/images/logo.png"
 import { useTheme } from "styled-components"
 import { useFormik } from "formik"
-import "../pages/css/Form.css"
+import Logo from "../../assets/images/logo.png"
+import "./Form.css"
 import { Visibility, VisibilityOff } from "@mui/icons-material"
 import * as Yup from "yup"
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 import { useLocation, useNavigate, useNavigation } from "react-router-dom"
 
 function Form() {
@@ -44,8 +44,8 @@ function Form() {
 	}
 	const formik = useFormik({
 		initialValues: {
-			email: "",
-			password: "",
+			email: "as@g.c",
+			password: "asdasdas",
 		},
 		validationSchema: Yup.object({
 			email: Yup.string()

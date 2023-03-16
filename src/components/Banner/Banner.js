@@ -22,18 +22,10 @@ import {
 	useParams,
 	useSearchParams,
 } from "react-router-dom"
-import apiService from "../../api/apiService"
 import { API_KEY } from "../../api/requests"
 import "./Banner.css"
 import ImdbRating from "./ImdbRating"
-function Banner({
-	movie,
-	setMovie,
-	movieId,
-	setIsMovieDetail,
-	isMovieDetail,
-	casts,
-}) {
+function Banner({ movie, setMovie, movieId, setIsMovieDetail, isMovieDetail }) {
 	const theme = useTheme()
 	const paperTheme = {
 		backgroundColor: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%)`,
@@ -99,9 +91,12 @@ function Banner({
 		textTransform: "capitalize",
 	}
 
-	const [handleAddToList, movieExists, setMovieExists, handleRemoveFromList] =
-		useOutletContext()
-
+	const [
+		handleAddToList,
+		handleRemoveFromList,
+		favoriteMovies,
+		setFavoriteMovies,
+	] = useOutletContext()
 	const { media, id } = useParams()
 	const [selectedMovie, setSelectedMovie] = useState(null)
 
@@ -126,6 +121,10 @@ function Banner({
 
 		fetchData()
 	}, [id, media, isMovieDetail])
+
+	const movieExistsFromBanner = favoriteMovies.some(
+		(item) => item.id === movie.id
+	)
 
 	return !movie ? (
 		<Typography color="primary">Doesnt have movie</Typography>
@@ -171,26 +170,12 @@ function Banner({
 										/>
 								  ))
 								: ""}
-							{/* <Paper style={infos}>{movie.year.slice(0, 4)}</Paper> */}
 						</Grid>
 						<Typography style={desc}>
 							{movie.overview.length > 150
 								? `${movie.overview.slice(0, 150)}...`
 								: movie.overview}
 						</Typography>
-						{/* <div>
-							{movie.genres ? (
-								movie.genres.name ? (
-									movie.genres.map((genre) => (
-										<Typography>{genre.name}</Typography>
-									))
-								) : (
-									""
-								)
-							) : (
-								<div>"No Genres"</div>
-							)}
-						</div> */}
 
 						<div>
 							<Button
@@ -210,30 +195,10 @@ function Banner({
 								startIcon={<Add />}
 								size="large"
 								onClick={() => handleAddToList(movie)}
+								disabled={movieExistsFromBanner}
 							>
 								My List
 							</Button>
-							{/* {movieExists ? (
-								<Button
-									style={listBtn}
-									variant="contained"
-									startIcon={<Remove />}
-									size="large"
-									onClick={() => handleRemoveFromList(movie)}
-								>
-									Remove
-								</Button>
-							) : (
-								<Button
-									style={listBtn}
-									variant="contained"
-									startIcon={<Add />}
-									size="large"
-									onClick={() => handleAddToList(movie)}
-								>
-									My List
-								</Button>
-							)} */}
 						</div>
 					</div>
 

@@ -8,14 +8,14 @@ import MenuItem from "@mui/material/MenuItem"
 import { Link, NavLink } from "react-router-dom"
 import "./Nav.css"
 const pages = [
-	{ name: "Home", link: "home" },
+	{ name: "Home", link: "/" },
 	{ name: "Movies", link: "movies" },
 	{ name: "TV Shows", link: "tv" },
 	{ name: "Browse", link: "browse" },
 	{ name: "My List", link: "mylist" },
 ]
 
-function LeftPages({}) {
+function LeftPages() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null)
 
 	const handleOpenNavMenu = (event) => {

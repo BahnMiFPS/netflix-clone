@@ -1,36 +1,31 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
-import Browse from "./pages/Browse"
-import Home from "./pages/Home"
-import HomePage from "./pages/HomePage"
 import Login from "./pages/Login"
 import MovieDetail from "./pages/MovieDetail"
-import Movies from "./pages/Movies"
 import MyList from "./pages/MyList"
 import Root from "./pages/Root"
-import TVShows from "./pages/TVShows"
 import Video from "./pages/Video"
+import MediaPage from "./pages/MediaPage"
+import SearchPage from "./pages/SearchPage"
+import Browse from "./pages/Browse"
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Root />,
 		children: [
+			// {
+			// 	index: true,
+			// 	element: <Home />,
+			// },
 			{
 				index: true,
-				element: <Home />,
+				element: <MediaPage />,
 			},
 			{
-				path: "/movies",
-				element: <Movies />,
+				path: "/:media",
+				element: <MediaPage />,
 			},
-			{
-				path: "/tv",
-				element: <TVShows />,
-			},
-			{
-				path: "/home",
-				element: <HomePage />,
-			},
+
 			{
 				path: "/:media/:id",
 				element: <MovieDetail />,

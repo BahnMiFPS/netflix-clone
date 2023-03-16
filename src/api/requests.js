@@ -2,7 +2,7 @@ const API_KEY = `${process.env.REACT_APP_API_KEY}`
 const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
 const requests = [
 	{
-		name: "Trending movies",
+		name: "Trending",
 		url: `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`,
 	},
 	{
@@ -18,7 +18,7 @@ const requests = [
 
 const requestsMovies = [
 	{
-		name: "Trending",
+		name: "Trending Movies",
 		url: `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`,
 	},
 	{
@@ -77,7 +77,7 @@ const requestsMovies = [
 
 const requestsTVShows = [
 	{
-		name: "Trending",
+		name: "Trending TV Shows",
 		url: `https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`,
 	},
 	{
